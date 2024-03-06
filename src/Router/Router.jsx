@@ -6,8 +6,10 @@ import Register from "../Pages/Register/Register";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import AdminDashboard from "../Layout/AdminDashboard";
-import AdminHome from "../Pages/AdminHome/AdminHome";
-import TeacherRequest from "../components/AdminDashboard/TeacherRequest";
+import AdminHome from "../Pages/AdminDashboard/AdminHome";
+import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
+import Users from "../Pages/AdminDashboard/Users";
+import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,19 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/teacherRequest",
         element: <TeacherRequest/>
-      }
+      },
+      {
+        path: "/dashboard/users",
+        element: <Users/>
+      },
+      {
+        path: "/dashboard/allClasses",
+        element: <AllClasses/>
+      },
+      {
+        path: "/dashboard/adminProfile",
+        element: <AdminProfile/>
+      },
     ]
 
   }

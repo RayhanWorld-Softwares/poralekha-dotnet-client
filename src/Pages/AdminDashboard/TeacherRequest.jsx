@@ -2,7 +2,7 @@
 
 const TeacherRequest = () => {
 	return (
-		<div>
+		<div className="border">
 			this is TeacherRequest component 
 		</div>
 	);
