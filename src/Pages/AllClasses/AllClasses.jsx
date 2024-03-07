@@ -2,7 +2,7 @@
 const AllClasses = () => {
 	return (
 		<div>
-		All Classes Coming soon
+		All Classes Coming soon 
 		</div>
 	);
 };

@@ -42,6 +42,7 @@ const Register = () => {
       if(res?.data.success === true){
         toast.success("Registration Successfully ")
         reset()
+        navigate("/")
       }
     } catch (error) {
       console.log(error);

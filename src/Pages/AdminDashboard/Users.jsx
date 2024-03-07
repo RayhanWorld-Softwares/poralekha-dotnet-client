@@ -5,7 +5,7 @@ const Users = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  console.log(users);
+ 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -13,7 +13,6 @@ const Users = () => {
         setUsers(res?.data?.payload?.users);
       } catch (err) {
         console.error("Error fetching users request:", err);
-        // setError(err);
         throw new Error("users data fetch error");
       } finally {
         setIsLoading(false);

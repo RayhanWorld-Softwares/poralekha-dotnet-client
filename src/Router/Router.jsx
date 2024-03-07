@@ -1,19 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminDashboard from "../Layout/AdminDashboard";
 import MainLayout from "../Layout/MainLayout";
+import TeacherDashboard from "../Layout/TeacherDashboard";
+import AdminAllClasses from "../Pages/AdminDashboard/AdminAllClasses";
+import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
+import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
+import Users from "../Pages/AdminDashboard/Users";
+import AllClasses from "../Pages/AllClasses/AllClasses";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-import AllClasses from "../Pages/AllClasses/AllClasses";
-import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
-import AdminDashboard from "../Layout/AdminDashboard";
-import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
-import Users from "../Pages/AdminDashboard/Users";
-import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
-import TeacherDashboard from "../Layout/TeacherDashboard";
 import AddClass from "../Pages/TeacherDashboard/AddClass";
 import MyClass from "../Pages/TeacherDashboard/MyClass";
 import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
+import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin-dashboard/allClasses",
-        element: <AllClasses />,
+        element: <AdminAllClasses />,
       },
       {
         path: "/admin-dashboard/profile",
