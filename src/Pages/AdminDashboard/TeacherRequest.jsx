@@ -4,7 +4,6 @@ import useAxiosLocal from "../../hooks/useAxiosLocal";
 const TeacherRequest = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [teacherRequests, setTeacherRequests] = useState([]);
 
   useEffect(() => {

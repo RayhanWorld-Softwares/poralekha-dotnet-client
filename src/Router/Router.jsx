@@ -6,10 +6,13 @@ import Register from "../Pages/Register/Register";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import AdminDashboard from "../Layout/AdminDashboard";
-import AdminHome from "../Pages/AdminDashboard/AdminHome";
 import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
 import Users from "../Pages/AdminDashboard/Users";
 import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
+import TeacherDashboard from "../Layout/TeacherDashboard";
+import AddClass from "../Pages/TeacherDashboard/AddClass";
+import MyClass from "../Pages/TeacherDashboard/MyClass";
+import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 
 const router = createBrowserRouter([
   {
@@ -30,41 +33,54 @@ const router = createBrowserRouter([
       },
       {
         path: "allClasses",
-        element: <AllClasses/>
+        element: <AllClasses />,
       },
       {
         path: "techOnPoralekha",
-        element: <TechOnPoralekha/>
-      }
+        element: <TechOnPoralekha />,
+      },
     ],
   },
   {
-    path: "/dashboard",
-    element: <AdminDashboard/>,
+    path: "/admin-dashboard",
+    element: <AdminDashboard />,
     children: [
       {
-        path: "/dashboard",
-        element: <AdminHome/>
+        path: "/admin-dashboard/teacherRequest",
+        element: <TeacherRequest />,
       },
       {
-        path: "/dashboard/teacherRequest",
-        element: <TeacherRequest/>
+        path: "/admin-dashboard/users",
+        element: <Users />,
       },
       {
-        path: "/dashboard/users",
-        element: <Users/>
+        path: "/admin-dashboard/allClasses",
+        element: <AllClasses />,
       },
       {
-        path: "/dashboard/allClasses",
-        element: <AllClasses/>
+        path: "/admin-dashboard/profile",
+        element: <AdminProfile />,
+      },
+    ],
+  },
+  {
+    path: "/teacher-dashboard",
+    element: <TeacherDashboard />,
+    children: [
+      {
+        path: "/teacher-dashboard/add-class",
+        element: <AddClass />,
       },
       {
-        path: "/dashboard/adminProfile",
-        element: <AdminProfile/>
+        path: "/teacher-dashboard/my-class",
+        element: <MyClass />,
       },
-    ]
-
-  }
+      {
+        path: "/teacher-dashboard/profile",
+        element: <TeacherProfile />,
+      },
+    ],
+  },
 ]);
 
 export default router;
