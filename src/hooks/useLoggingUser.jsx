@@ -6,7 +6,7 @@ const useLoggingUser = () => {
   const axiosLocal = useAxiosLocal();
   const { user } = useAuth();
 
-  const [logging, setLogging] = useState();
+  const [logging, setLogging] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

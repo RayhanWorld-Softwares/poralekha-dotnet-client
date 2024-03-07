@@ -1,12 +1,11 @@
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import useAuth from "../../hooks/useAuth";
-import useAxiosLocal from "../../hooks/useAxiosLocal";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../Utils/Utils";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import useAxiosLocal from "../../hooks/useAxiosLocal";
 
-const AddClass = () => {
-  const { user } = useAuth();
+const UpdateClasses = () => {
+  const { payload } = useLoaderData();
   const axiosLocal = useAxiosLocal();
   const navigate = useNavigate();
 
@@ -18,22 +17,22 @@ const AddClass = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const image = data.image[0];
-
+  const image = data.image[0];
     try {
       const imageData = await imageUpload(image);
       const ClassInfo = {
         title: data.title,
-        name: user?.displayName,
-        email: user?.email,
         price: data.price,
-        status: "pending",
         description: data.description,
         image: imageData?.data?.display_url,
       };
-      const res = await axiosLocal.post("/api/class", ClassInfo);
+
+      const res = await axiosLocal.put(
+        `/api/class/update/${payload?._id}`,
+        ClassInfo
+      );
       if (res?.data.success === true) {
-        toast.success("Class Added Successfully ");
+        toast.success("Class Updated Successfully ");
         navigate("/teacher-dashboard/my-classes");
         reset();
       }
@@ -52,13 +51,14 @@ const AddClass = () => {
               <div className="card-body  md:px-16 bg-white rounded-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="">
                   <h2 className="text-center text-3xl font-bold my-5">
-                    Add New Class
+                    Update to Class
                   </h2>
 
                   <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     <div className="form-control">
                       <input
                         type="text"
+                        defaultValue={payload?.title}
                         {...register("title", { required: true })}
                         placeholder="Title"
                         className="input input-bordered "
@@ -72,6 +72,7 @@ const AddClass = () => {
 
                     <div className="form-control min-w-[350px]">
                       <input
+                        defaultValue={payload?.price}
                         type="text"
                         {...register("price", { required: true })}
                         placeholder="Price $"
@@ -84,18 +85,10 @@ const AddClass = () => {
                       )}
                     </div>
 
-                    <div className="border flex items-center rounded-md px-2">
-                      {user?.displayName}
-                    </div>
-
-                    <div className="border p-3 flex items-center rounded-md ">
-                      {user?.email}
-                    </div>
-
                     <div className="border rounded-lg px-2 flex items-center">
                       <input
                         {...register("image", { required: true })}
-                        required
+                        // required
                         type="file"
                         id="image"
                         accept="image/*"
@@ -110,6 +103,7 @@ const AddClass = () => {
                     <div className="form-control min-w-[350px]">
                       <input
                         type="text"
+                        defaultValue={payload?.description}
                         {...register("description", { required: true })}
                         placeholder="Description"
                         className="input input-bordered w-full"
@@ -127,7 +121,7 @@ const AddClass = () => {
                       type="submit"
                       className="btn   bg-[#61adff] hover:bg-[#006ce1] text-white"
                     >
-                      Add Class
+                      Update Class
                     </button>
                   </div>
                 </form>
@@ -140,4 +134,4 @@ const AddClass = () => {
   );
 };
 
-export default AddClass;
+export default UpdateClasses;
