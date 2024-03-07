@@ -25,7 +25,7 @@ const TeacherSideBar = () => {
         </div>
 
         <div className="text-base mb-5 border-b border-gray-800">
-          <Link to={"/teacher-dashboard/my-class"}>
+          <Link to={"/teacher-dashboard/my-classes"}>
             <h3 className="flex items-center gap-3 pb-3">
               <FaUsersCog size={20} /> <span>My Class </span>
             </h3>
