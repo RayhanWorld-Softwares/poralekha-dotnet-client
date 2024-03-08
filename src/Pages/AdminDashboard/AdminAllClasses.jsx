@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
+import toast from "react-hot-toast";
 
 const AdminAllClasses = () => {
   const [allClasses, setAllClasses] = useState([]);
@@ -21,9 +22,27 @@ const AdminAllClasses = () => {
     fetchAllClass();
   }, [axiosLocal]);
 
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      const updateStatus = { status };
+      const res = await axiosLocal.put(`/api/class/${id}`, updateStatus);
+      if (res?.data?.payload?.status === status) {
+        toast.success(`class (${status})`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleApproved = async (id) => {
+    await handleStatusUpdate(id, "accepted");
+  };
+  const handleReject = async (id) => {
+    await handleStatusUpdate(id, "rejected");
+  };
+
   return (
     <div className="border">
-		{loading && <p>Loading...</p>}
+      {loading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -32,6 +51,7 @@ const AdminAllClasses = () => {
               <th>Name</th>
               <th>Title </th>
               <th>description</th>
+              <th>Action</th>
               <th>Action</th>
               <th>Action</th>
             </tr>
@@ -56,23 +76,52 @@ const AdminAllClasses = () => {
                     </div>
                   </div>
                 </td>
-                <td>
-                  {allClass?.title}
-                </td>
-                
-                <td className="my-auto flex ">
-                {allClass?.description.length > 150 ? (
-                  <p>{allClass?.description.slice(0, 150)}...</p>
-                ) : (
-                  <p>{allClass?.description}</p>
-                )}{" "}
-              </td>
+                <td>{allClass?.title}</td>
 
+                <td className="my-auto flex ">
+                  {allClass?.description.length > 150 ? (
+                    <p>{allClass?.description.slice(0, 150)}...</p>
+                  ) : (
+                    <p>{allClass?.description}</p>
+                  )}{" "}
+                </td>
+
+                {allClass?.status == "accepted" ? (
+                  <th>
+                    <button className="btn btn-primary btn-sm ">
+                      E See Progress
+                    </button>
+                  </th>
+                ) : (
+                  <th>
+                    <button disabled className="btn btn-primary btn-sm ">
+                      D See Progress
+                    </button>
+                  </th>
+                )}
+              {allClass?.status === 'accepted' ? <th>
+                  <h3
+                    className="bg-green-300 rounded-lg p-1.5 shadow-2xl "
+                    
+                  >
+                    Approved 
+                  </h3>
+                </th> : <th>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={() => handleApproved(allClass._id)}
+                  >
+                    Approve
+                  </button>
+                </th>}
+                
                 <th>
-                  <button className="btn btn-primary btn-xs">Approved</button>
-                </th>
-                <th>
-                  <button className="btn btn-primary btn-xs">Reject</button>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={() => handleReject(allClass?._id)}
+                  >
+                    Reject
+                  </button>
                 </th>
               </tr>
             ))}
