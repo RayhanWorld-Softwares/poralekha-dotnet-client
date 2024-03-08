@@ -15,6 +15,9 @@ import MyClass from "../Pages/TeacherDashboard/MyClass";
 import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
+import StudentDashboard from "../Layout/StudentDashboard";
+import MyEnrollClass from "../components/StudentDashboard/MyEnrollClass";
+import StudentProfile from "../components/StudentDashboard/StudentProfile";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +92,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "student-dashboard",
+    element: <StudentDashboard/>,
+    children: [
+      {
+        path: "student-dashboard/my-enroll-class",
+        element: <MyEnrollClass/>
+      },
+      {
+        path: "student-dashboard/profile",
+        element: <StudentProfile/>
+      }
+    ]
+  }
 ]);
 
 export default router;
