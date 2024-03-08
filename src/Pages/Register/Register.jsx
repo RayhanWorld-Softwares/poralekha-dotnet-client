@@ -38,7 +38,7 @@ const Register = () => {
         image: imageData?.data?.display_url,
         role: "student",
       };
-      const res = await axiosLocal.post("/api/user/register", userInfo);
+      const res = await axiosLocal.post("/api/users/register", userInfo);
       if(res?.data.success === true){
         toast.success("Registration Successfully ")
         reset()

@@ -89,13 +89,13 @@ const AdminAllClasses = () => {
                 {allClass?.status == "accepted" ? (
                   <th>
                     <button className="btn btn-primary btn-sm ">
-                      E See Progress
+                      See Progress
                     </button>
                   </th>
                 ) : (
                   <th>
                     <button disabled className="btn btn-primary btn-sm ">
-                      D See Progress
+                      See Progress
                     </button>
                   </th>
                 )}

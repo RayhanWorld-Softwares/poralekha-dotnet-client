@@ -14,7 +14,6 @@ const SocialLogin = () => {
     try {
       //1. User Registration
       const result = await provider();
-      console.log(result.user);
       if(result?.user){
         const userInfo = {
           name: result?.user.displayName,
@@ -22,7 +21,7 @@ const SocialLogin = () => {
           image: result?.user.photoURL,
           role: "student",
         };
-        const res = await axiosLocal.post("/api/user/register", userInfo);
+        const res = await axiosLocal.post("/api/users/register", userInfo);
         if(res?.data.success === true){
           toast.success("Login Successfully");
           navigate("/");

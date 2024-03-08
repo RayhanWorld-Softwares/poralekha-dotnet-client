@@ -12,13 +12,14 @@ const MyClass = () => {
 
   const [myClasses, setMyClasses] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(myClasses);
 
 
   useEffect(() => {
     const fetchMyClass = async () => {
       try {
         setLoading(true);
-        const res = await axiosLocal.get(`/api/class/${user?.email}`);
+        const res = await axiosLocal.get(`/api/class/email/${user?.email}`);
         setMyClasses(res?.data?.payload?.allClass);
       } catch (error) {
         throw new Error("fetch all class from teacher dashboard error:", error);
@@ -67,7 +68,7 @@ const MyClass = () => {
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12 bg-slate-100 h-screen">
-      {myClasses.map((myClass) => (
+      {myClasses?.map((myClass) => (
         <div key={myClass?._id}>
           <div className="card card-compact bg-base-100 shadow-xl">
             <figure>

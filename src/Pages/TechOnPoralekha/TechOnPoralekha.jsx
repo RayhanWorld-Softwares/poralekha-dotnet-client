@@ -2,10 +2,14 @@ import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
+import useLoggingUser from "../../hooks/useLoggingUser";
 
 const TechOnPoralekha = () => {
   const { user } = useAuth();
   const axiosLocal = useAxiosLocal()
+  const {loggingUser} = useLoggingUser()
+  console.log(loggingUser?._id);
+
   const {
     register,
     reset,
@@ -24,7 +28,8 @@ const TechOnPoralekha = () => {
         title: data.title,
         category: data.category,
         experience: data.experience,
-        status: "pending"
+        status: "pending",
+        userId: loggingUser?._id
       };
       const res = await axiosLocal.post("/api/teacher", userInfo);
       if(res?.data.success === true){

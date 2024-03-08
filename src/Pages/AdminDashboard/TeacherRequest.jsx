@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
+import toast from "react-hot-toast";
+import useLoggingUser from "../../hooks/useLoggingUser";
 
 const TeacherRequest = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
   const [teacherRequests, setTeacherRequests] = useState([]);
+  const {loggingUser} = useLoggingUser()
+  console.log(loggingUser?._id);
 
   useEffect(() => {
     const fetchTeacherRequest = async () => {
@@ -22,9 +26,30 @@ const TeacherRequest = () => {
     fetchTeacherRequest();
   }, [axiosLocal]);
 
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      const updateStatus = { status };
+      const res = await axiosLocal.put(`/api/teacher/${id}`, updateStatus);
+      if (res?.data?.payload?.status === status) {
+        toast.success(`teacher request (${status})`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleApproved = async (id) => {
+    await handleStatusUpdate(id, "accepted");
+    await axiosLocal.put(`/api/users/update/${loggingUser?._id}`, {
+      role: "teacher"
+    })
+  };
+  const handleReject = async (id) => {
+    await handleStatusUpdate(id, "rejected");
+  };
+
   return (
     <div className="border">
-		{isLoading && <p>Loading...</p>}
+      {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -69,12 +94,41 @@ const TeacherRequest = () => {
                 <td>{teacherRequest?.experience}</td>
 
                 <th>{teacherRequest?.status}</th>
-                <th>
-                  <button className="btn btn-primary btn-xs">Approved</button>
-                </th>
-                <th>
-                  <button className="btn btn-primary btn-xs">Reject</button>
-                </th>
+
+                {teacherRequest?.status === "pending" ? (
+                  <>
+                    {" "}
+                    <th>
+                      <button
+                        className="btn btn-primary btn-xs"
+                        onClick={() => handleApproved(teacherRequest?._id)}
+                      >
+                        Approved
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="btn btn-primary btn-xs"
+                        onClick={() => handleReject(teacherRequest?._id)}
+                      >
+                        Reject
+                      </button>
+                    </th>
+                  </>
+                ) : (
+                  <>
+                    <th>
+                      <button className="btn btn-primary btn-xs" disabled>
+                        Approved
+                      </button>
+                    </th>
+                    <th>
+                      <button className="btn btn-primary btn-xs" disabled>
+                        Reject
+                      </button>
+                    </th>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
