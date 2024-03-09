@@ -20,6 +20,7 @@ import MyEnrollClass from "../components/StudentDashboard/MyEnrollClass";
 import StudentProfile from "../components/StudentDashboard/StudentProfile";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import Payment from "../Pages/Payment/Payment";
+import ClassFeedback from "../Pages/AdminDashboard/ClassFeedback";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/admin-dashboard/profile",
         element: <AdminProfile />,
+      },
+      {
+        path: "/admin-dashboard/class-feedback/:id",
+        element: <ClassFeedback />,
       },
     ],
   },

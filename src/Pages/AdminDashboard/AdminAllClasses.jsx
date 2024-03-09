@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const AdminAllClasses = () => {
   const [allClasses, setAllClasses] = useState([]);
@@ -86,11 +87,14 @@ const AdminAllClasses = () => {
                   )}{" "}
                 </td>
 
+                {/* see progress */}
                 {allClass?.status == "accepted" ? (
                   <th>
+                    <Link to={`/admin-dashboard/class-feedback/${allClass?._id}`}>
                     <button className="btn btn-primary btn-sm ">
                       See Progress
                     </button>
+                    </Link>
                   </th>
                 ) : (
                   <th>
@@ -99,30 +103,40 @@ const AdminAllClasses = () => {
                     </button>
                   </th>
                 )}
-              {allClass?.status === 'accepted' ? <th>
-                  <h3
-                    className="bg-green-300 rounded-lg p-1.5 shadow-2xl "
-                    
-                  >
-                    Approved 
-                  </h3>
-                </th> : <th>
-                  <button
-                    className="btn btn-primary btn-sm"
-                    onClick={() => handleApproved(allClass._id)}
-                  >
-                    Approve
-                  </button>
-                </th>}
-                
-                <th>
-                  <button
-                    className="btn btn-primary btn-sm"
-                    onClick={() => handleReject(allClass?._id)}
-                  >
-                    Reject
-                  </button>
-                </th>
+
+                {allClass?.status === "accepted" ? (
+                  <>
+                    <th>
+                      <button className="btn btn-primary btn-sm" disabled>
+                        Approve
+                      </button>
+                    </th>
+                    <th>
+                      <button className="btn btn-primary btn-sm" disabled>
+                        Reject
+                      </button>
+                    </th>
+                  </>
+                ) : (
+                  <>
+                    <th>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => handleApproved(allClass._id)}
+                      >
+                        Approve
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => handleReject(allClass?._id)}
+                      >
+                        Reject
+                      </button>
+                    </th>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
