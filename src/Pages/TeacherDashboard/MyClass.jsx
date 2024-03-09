@@ -14,7 +14,6 @@ const MyClass = () => {
   const [loading, setLoading] = useState(true);
   console.log(myClasses);
 
-
   useEffect(() => {
     const fetchMyClass = async () => {
       try {
@@ -29,12 +28,12 @@ const MyClass = () => {
     };
 
     if (user?.email) {
-		fetchMyClass();
+      fetchMyClass();
     }
   }, [axiosLocal, user?.email]);
 
-  if(loading){
-	<h2>Loading..</h2>
+  if (loading) {
+    <h2>Loading..</h2>;
   }
 
   const handleDelete = (id) => {
@@ -100,7 +99,15 @@ const MyClass = () => {
               </h3>
 
               <div className="flex justify-between">
-                <button className="btn btn-sm">See Details</button>
+                {myClass?.status === "accepted" ? (
+                  <Link to={`/teacher-dashboard/my-class/${myClass?._id}`}>
+                    <button className="btn btn-sm">See Details</button>
+                  </Link>
+                ) : (
+                  <button disabled className="btn btn-sm">
+                    See Details
+                  </button>
+                )}
 
                 <div className="flex gap-6 items-center shadow-2xl">
                   <Link to={`/teacher-dashboard/update-class/${myClass?._id}`}>

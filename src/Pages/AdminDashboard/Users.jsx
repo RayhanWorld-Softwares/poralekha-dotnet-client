@@ -5,7 +5,7 @@ const Users = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
- 
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -20,6 +20,13 @@ const Users = () => {
     };
     fetchUsers();
   }, [axiosLocal]);
+
+  const makeAdmin = async (id) => {
+    console.log(id);
+    await axiosLocal.put(`/api/users/update/${id}`, {
+      role: "admin",
+    });
+  };
 
   return (
     <div className="border">
@@ -52,9 +59,26 @@ const Users = () => {
                 </td>
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
-                <th>
-                  <button className="btn btn-primary btn-xs">Make Admin </button>
-                </th>
+
+                {user?.role === "admin" ? (
+                  <th>
+                    <button
+                      disabled
+                      className="btn btn-primary btn-xs"
+                    >
+                      Make Admin{" "}
+                    </button>
+                  </th>
+                ) : (
+                  <th>
+                    <button
+                      onClick={() => makeAdmin(user?._id)}
+                      className="btn btn-primary btn-xs"
+                    >
+                      Make Admin{" "}
+                    </button>
+                  </th>
+                )}
               </tr>
             ))}
           </tbody>

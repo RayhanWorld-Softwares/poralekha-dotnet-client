@@ -21,6 +21,7 @@ import StudentProfile from "../components/StudentDashboard/StudentProfile";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import Payment from "../Pages/Payment/Payment";
 import ClassFeedback from "../Pages/AdminDashboard/ClassFeedback";
+import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
         path: "/teacher-dashboard/update-class/:id",
         element: <UpdateClasses/>,
         loader: ({params}) => fetch(`http://localhost:5000/api/class/find/${params.id}`)
+      },
+      {
+        path: "/teacher-dashboard/my-class/:id",
+        element: <MyClassDetails />,
       },
     ],
   },
