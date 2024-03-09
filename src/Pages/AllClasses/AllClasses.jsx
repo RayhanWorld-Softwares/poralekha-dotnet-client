@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
+import { Link } from "react-router-dom";
 
 const AllClasses = () => {
   const [allClasses, setAllClasses] = useState([]);
@@ -59,7 +60,9 @@ const AllClasses = () => {
               </h3>
 
               <div className="flex justify-between">
-                <button className="btn btn-sm">Enroll Now </button>
+                <Link to={`/class-details/${allClass?._id}`}>
+                  <button className="btn btn-sm">Enroll Now </button>
+                </Link>
               </div>
             </div>
           </div>

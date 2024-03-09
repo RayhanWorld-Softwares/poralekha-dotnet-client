@@ -18,6 +18,8 @@ import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import StudentDashboard from "../Layout/StudentDashboard";
 import MyEnrollClass from "../components/StudentDashboard/MyEnrollClass";
 import StudentProfile from "../components/StudentDashboard/StudentProfile";
+import ClassDetails from "../Pages/AllClasses/ClassDetails";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -41,11 +43,22 @@ const router = createBrowserRouter([
         element: <AllClasses />,
       },
       {
+        path: "class-details/:id",
+        element: <ClassDetails/>,
+        loader: ({params}) => fetch(`http://localhost:5000/api/class/find/${params.id}`)
+      },
+      {
         path: "techOnPoralekha",
         element: <TechOnPoralekha />,
       },
+      {
+        path: "payment/:id",
+        element: <Payment />,
+      },
     ],
   },
+
+  // admin route
   {
     path: "/admin-dashboard",
     element: <AdminDashboard />,
@@ -69,6 +82,8 @@ const router = createBrowserRouter([
     ],
   },
 
+
+// teacher route
   {
     path: "/teacher-dashboard",
     element: <TeacherDashboard />,
@@ -92,18 +107,21 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // student route 
   {
-    path: "student-dashboard",
+    path: "/student-dashboard",
     element: <StudentDashboard/>,
     children: [
       {
-        path: "student-dashboard/my-enroll-class",
+        path: "/student-dashboard/my-enroll-class",
         element: <MyEnrollClass/>
       },
       {
-        path: "student-dashboard/profile",
+        path: "/student-dashboard/profile",
         element: <StudentProfile/>
-      }
+      },
+      
     ]
   }
 ]);
