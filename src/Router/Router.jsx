@@ -16,12 +16,12 @@ import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import StudentDashboard from "../Layout/StudentDashboard";
-import MyEnrollClass from "../components/StudentDashboard/MyEnrollClass";
-import StudentProfile from "../components/StudentDashboard/StudentProfile";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import Payment from "../Pages/Payment/Payment";
 import ClassFeedback from "../Pages/AdminDashboard/ClassFeedback";
 import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
+import StudentProfile from "../Pages/StudentDashboard/StudentProfile";
+import MyEnrollClass from "../Pages/StudentDashboard/MyEnrollClass";
 
 const router = createBrowserRouter([
   {

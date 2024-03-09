@@ -16,7 +16,7 @@ const StudentSiteBar = () => {
         </div>
 
         <div className="text-base mb-5 shadow-2xl border-b border-gray-800">
-          <Link to={"student-dashboard/my-enroll-class"}>
+          <Link to={"/student-dashboard/my-enroll-class"}>
             <h3 className="flex items-center gap-3 pb-4">
               <GiTeacher size={20} /> <span>My Enroll Class</span>
             </h3>
@@ -24,7 +24,7 @@ const StudentSiteBar = () => {
         </div>
 
         <div className="text-base mb-5 border-b border-gray-800">
-          <Link to={"student-dashboard/profile"}>
+          <Link to={"/student-dashboard/profile"}>
             <h3 className="flex items-center gap-3 pb-3">
               <PiUserSwitchBold size={20} /> <span>Profile</span>
             </h3>

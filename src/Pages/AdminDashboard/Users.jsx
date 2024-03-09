@@ -5,11 +5,13 @@ const Users = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [searchValue, setSearchValue] = useState("")
+
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axiosLocal.get("/api/users");
+        const res = await axiosLocal.get(`/api/users?email=${searchValue}`);
         setUsers(res?.data?.payload?.users);
       } catch (err) {
         console.error("Error fetching users request:", err);
@@ -19,7 +21,7 @@ const Users = () => {
       }
     };
     fetchUsers();
-  }, [axiosLocal]);
+  }, [axiosLocal, searchValue]);
 
   const makeAdmin = async (id) => {
     console.log(id);
@@ -32,6 +34,16 @@ const Users = () => {
     <div className="border">
       {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
+        {/* search bar */}
+        <div className="flex justify-center items-center my-2">
+          <input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+            type="text"
+            placeholder="Search by user email"
+            className="input input-bordered input-info w-full max-w-xs "
+          />
+        </div>
         <table className="table">
           {/* head */}
           <thead className="bg-[#F9FAFE]">
@@ -62,10 +74,7 @@ const Users = () => {
 
                 {user?.role === "admin" ? (
                   <th>
-                    <button
-                      disabled
-                      className="btn btn-primary btn-xs"
-                    >
+                    <button disabled className="btn btn-primary btn-xs">
                       Make Admin{" "}
                     </button>
                   </th>

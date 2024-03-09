@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import StudentSiteBar from "../components/TeacherDashboard/StudentSiteBar";
+import StudentSiteBar from "../components/StudentDashboard/StudentSiteBar";
 
 const StudentDashboard = () => {
   return (

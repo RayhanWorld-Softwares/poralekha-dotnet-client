@@ -1,8 +1,7 @@
-
 import { FiEdit } from "react-icons/fi";
 import useLoggingUser from "../../hooks/useLoggingUser";
 
-const TeacherProfile = () => {
+const StudentProfile = () => {
 const {loggingUser} = useLoggingUser()
 
   return (
@@ -62,4 +61,4 @@ const {loggingUser} = useLoggingUser()
   );
 };
 
-export default TeacherProfile;
+export default StudentProfile;
