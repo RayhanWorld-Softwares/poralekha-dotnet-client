@@ -5,7 +5,6 @@ import useAuth from "../../hooks/useAuth";
 const NavbarLink = () => {
   const { loggingUser } = useLoggingUser();
   const { user } = useAuth();
-  console.log(loggingUser?.role);
 
   return (
     <div className="flex gap-4">
@@ -37,14 +36,16 @@ const NavbarLink = () => {
         </NavLink>
       )}
 
-      <NavLink
-        to="/login"
-        className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "text-[#D1A054] underline" : ""
-        }
-      >
-        Login
-      </NavLink>
+      {!user && (
+        <NavLink
+          to="/login"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-[#D1A054] underline" : ""
+          }
+        >
+          Login
+        </NavLink>
+      )}
     </div>
   );
 };

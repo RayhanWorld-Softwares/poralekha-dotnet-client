@@ -1,9 +1,12 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import useLoggingUser from "../../hooks/useLoggingUser";
+import { Link } from "react-router-dom";
 
 const DropDown = () => {
   const [isShow, setIsShow] = useState(false);
   const { user, logOut } = useAuth();
+  const { loggingUser } = useLoggingUser();
 
   return (
     <>
@@ -27,9 +30,27 @@ const DropDown = () => {
       {isShow && user ? (
         <ul className="menu  absolute menu-sm dropdown-content  mt-48 z-[10] p-2 shadow bg-base-100 rounded-box w-52 py-5">
           <h3 className="ml-3">{user?.displayName}</h3>
-          <li>
-            <h3 className="justify-between">Dashboard</h3>
-          </li>
+          {loggingUser?.role === "student" && (
+            <li>
+              <Link to={"/student-dashboard"}>
+                <h3 className="justify-between">Dashboard</h3>
+              </Link>
+            </li>
+          )}
+          {loggingUser?.role === "teacher" && (
+            <li>
+              <Link to={"/teacher-dashboard"}>
+                <h3 className="justify-between">Dashboard</h3>
+              </Link>
+            </li>
+          )}
+          {loggingUser?.role === "admin" && (
+            <li>
+              <Link to={"/admin-dashboard"}>
+                <h3 className="justify-between">Dashboard</h3>
+              </Link>
+            </li>
+          )}
 
           <li>
             <p onClick={logOut}>logout</p>
