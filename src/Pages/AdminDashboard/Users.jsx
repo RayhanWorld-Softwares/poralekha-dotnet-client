@@ -5,8 +5,7 @@ const Users = () => {
   const axiosLocal = useAxiosLocal();
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [searchValue, setSearchValue] = useState("")
-
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -24,7 +23,6 @@ const Users = () => {
   }, [axiosLocal, searchValue]);
 
   const makeAdmin = async (id) => {
-    console.log(id);
     await axiosLocal.put(`/api/users/update/${id}`, {
       role: "admin",
     });
@@ -37,8 +35,8 @@ const Users = () => {
         {/* search bar */}
         <div className="flex justify-center items-center my-2">
           <input
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             type="text"
             placeholder="Search by user email"
             className="input input-bordered input-info w-full max-w-xs "
@@ -51,6 +49,7 @@ const Users = () => {
               <th>Image</th>
               <th>name </th>
               <th>email</th>
+              <th>role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -71,6 +70,11 @@ const Users = () => {
                 </td>
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
+                <td className="">
+                  <span className="border p-1 bg-gray-300 rounded-lg">
+                    {user?.role}
+                  </span>
+                </td>
 
                 {user?.role === "admin" ? (
                   <th>
