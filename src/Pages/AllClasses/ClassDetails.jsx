@@ -1,8 +1,31 @@
-import { Link, useLoaderData } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
+import useAxiosLocal from "../../hooks/useAxiosLocal";
+import useLoggingUser from "../../hooks/useLoggingUser";
 
 const ClassDetails = () => {
   const { payload } = useLoaderData();
-  console.log(payload);
+  const { loggingUser } = useLoggingUser();
+  const axiosLocal = useAxiosLocal();
+  console.log(loggingUser);
+
+  const handleOrder = async (id) => {
+    console.log(id);
+    const orderInfo = {
+      userId: loggingUser?._id,
+      name: loggingUser?.name,
+      email: loggingUser?.email,
+      classId: id,
+    };
+    console.log(orderInfo);
+
+    const res = await axiosLocal.post("/api/order", orderInfo);
+    if (res?.data?.url) {
+      toast.success("order post successfully ");
+      window.location.replace(res?.data?.url)
+      console.log(26, res?.data);
+    }
+  };
 
   return (
     <div className="w-full px-2 md:px-6 lg:px-16 xl:px-44 mx-auto bg-slate-100">
@@ -23,9 +46,9 @@ const ClassDetails = () => {
           <p>Instructor: {payload?.name}</p>
           <p>Price: $ {payload?.price}</p>
           <div className="card-actions ">
-            <Link to={`/payment/${payload?._id}`} className="btn btn-sm">
-              Pay Now
-            </Link>
+            <button onClick={() => handleOrder(payload?._id)} className="btn ">
+              Pay Now{" "}
+            </button>
           </div>
         </div>
       </div>

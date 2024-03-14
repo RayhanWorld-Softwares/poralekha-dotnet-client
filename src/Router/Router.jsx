@@ -1,27 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminDashboard from "../Layout/AdminDashboard";
 import MainLayout from "../Layout/MainLayout";
+import StudentDashboard from "../Layout/StudentDashboard";
 import TeacherDashboard from "../Layout/TeacherDashboard";
 import AdminAllClasses from "../Pages/AdminDashboard/AdminAllClasses";
 import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
+import ClassFeedback from "../Pages/AdminDashboard/ClassFeedback";
 import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
 import Users from "../Pages/AdminDashboard/Users";
 import AllClasses from "../Pages/AllClasses/AllClasses";
+import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import PaymentFail from "../Pages/PaymentFail/PaymentFail";
+import PaymentSuccessful from "../Pages/PaymentSuccessful/PaymentSuccessful";
 import Register from "../Pages/Register/Register";
+import MyEnrollClass from "../Pages/StudentDashboard/MyEnrollClass";
+import StudentProfile from "../Pages/StudentDashboard/StudentProfile";
 import AddClass from "../Pages/TeacherDashboard/AddClass";
 import MyClass from "../Pages/TeacherDashboard/MyClass";
+import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
 import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
-import StudentDashboard from "../Layout/StudentDashboard";
-import ClassDetails from "../Pages/AllClasses/ClassDetails";
-import Payment from "../Pages/Payment/Payment";
-import ClassFeedback from "../Pages/AdminDashboard/ClassFeedback";
-import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
-import StudentProfile from "../Pages/StudentDashboard/StudentProfile";
-import MyEnrollClass from "../Pages/StudentDashboard/MyEnrollClass";
 
 const router = createBrowserRouter([
   {
@@ -46,16 +47,21 @@ const router = createBrowserRouter([
       },
       {
         path: "class-details/:id",
-        element: <ClassDetails/>,
-        loader: ({params}) => fetch(`http://localhost:5000/api/class/find/${params.id}`)
+        element: <ClassDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/class/find/${params.id}`),
       },
       {
         path: "techOnPoralekha",
         element: <TechOnPoralekha />,
       },
       {
-        path: "payment/:id",
-        element: <Payment />,
+        path: "payment/success/:tranId",
+        element: <PaymentSuccessful />,
+      },
+      {
+        path: "payment/fail/:tranId",
+        element: <PaymentFail />,
       },
     ],
   },
@@ -88,8 +94,7 @@ const router = createBrowserRouter([
     ],
   },
 
-
-// teacher route
+  // teacher route
   {
     path: "/teacher-dashboard",
     element: <TeacherDashboard />,
@@ -108,8 +113,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/teacher-dashboard/update-class/:id",
-        element: <UpdateClasses/>,
-        loader: ({params}) => fetch(`http://localhost:5000/api/class/find/${params.id}`)
+        element: <UpdateClasses />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/class/find/${params.id}`),
       },
       {
         path: "/teacher-dashboard/my-class/:id",
@@ -118,22 +124,21 @@ const router = createBrowserRouter([
     ],
   },
 
-  // student route 
+  // student route
   {
     path: "/student-dashboard",
-    element: <StudentDashboard/>,
+    element: <StudentDashboard />,
     children: [
       {
         path: "/student-dashboard/my-enroll-class",
-        element: <MyEnrollClass/>
+        element: <MyEnrollClass />,
       },
       {
         path: "/student-dashboard/profile",
-        element: <StudentProfile/>
+        element: <StudentProfile />,
       },
-      
-    ]
-  }
+    ],
+  },
 ]);
 
 export default router;
