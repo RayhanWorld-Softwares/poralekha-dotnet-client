@@ -1,3 +1,4 @@
+import ClassAssignment from "../../components/TeacherDashboard/ClassAssignment";
 import ClassProgress from "../../components/TeacherDashboard/ClassProgress";
 
 const MyClassDetails = () => {
@@ -5,6 +6,9 @@ const MyClassDetails = () => {
     <div className="bg-[#001E2B] h-screen">
       {/* class progress section */}
       <ClassProgress/>
+
+	{/* class assignment */}
+	<ClassAssignment/>
     </div>
   );
 };
