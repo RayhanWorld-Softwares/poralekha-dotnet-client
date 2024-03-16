@@ -66,10 +66,11 @@ const MyClass = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12 bg-slate-100 h-screen">
+    <div className="  bg-[#001E2B] h-screen text-white">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12  h-screen ">
       {myClasses?.map((myClass) => (
         <div key={myClass?._id}>
-          <div className="card card-compact bg-base-100 shadow-xl">
+          <div className="card card-compact bg-[#162C46] shadow-xl">
             <figure>
               <img
                 src={myClass?.image}
@@ -91,8 +92,8 @@ const MyClass = () => {
               <h2>Price: ${myClass?.price}</h2>
               <h2>Status: {myClass?.status}</h2>
               <h3>
-                {myClass?.description.length > 150 ? (
-                  <p>{myClass?.description.slice(0, 140)}...</p>
+                {myClass?.description.length > 80 ? (
+                  <p>{myClass?.description.slice(0,80)}...</p>
                 ) : (
                   <p>{myClass?.description}</p>
                 )}{" "}
@@ -128,6 +129,7 @@ const MyClass = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };

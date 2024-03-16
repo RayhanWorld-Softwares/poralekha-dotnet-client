@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import ClassFeedbackForm from "../AdminDashboard/ClassFeedbackForm";
-
+import { useLoaderData } from "react-router-dom";
 
 const MyEnrollClassDetails = () => {
   const axiosLocal = useAxiosLocal();
+  const { payload } = useLoaderData();
 
   const getAssignment = async () => {
     const res = await axiosLocal.get(`/api/assignment`);
@@ -19,9 +20,9 @@ const MyEnrollClassDetails = () => {
   return (
     <div>
       {/* TED Feedback section */}
-      <ClassFeedbackForm/>
+      <ClassFeedbackForm payload={payload} />
 
-      {/* assignment info */} 
+      {/* assignment info */}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -57,8 +58,6 @@ const MyEnrollClassDetails = () => {
                 <th>
                   <button className="btn btn-primary btn-sm ">Submit</button>
                 </th>
-
-                {/* see progress */}
               </tr>
             ))}
           </tbody>

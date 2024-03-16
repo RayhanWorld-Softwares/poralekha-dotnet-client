@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { BsStarFill, BsStar } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { VscFeedback } from "react-icons/vsc";
@@ -9,7 +10,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import Rating from "react-rating";
 
-const ClassFeedbackForm = () => {
+const ClassFeedbackForm = ({payload}) => {
   const { user } = useAuth();
   const axiosLocal = useAxiosLocal();
   const [rating, setRating] = useState(0);
@@ -26,11 +27,12 @@ const ClassFeedbackForm = () => {
     try {
       const feedback = {
         userName: user?.displayName,
-        title: data.title,
+        title: payload?.classTitle,
         feedbackText: data.feedbackText,
         image: user?.photoURL,
         rating: rating,
       };
+      console.log(feedback);
       const res = await axiosLocal.post("/api/feedback", feedback);
       if (res?.data.success === true) {
         toast.success("Feedback submit Successfully ");
@@ -77,21 +79,8 @@ const ClassFeedbackForm = () => {
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label className="label"></label>
-                <input
-                  {...register("title", { required: true })}
-                  type="text"
-                  placeholder="Class Title"
-                  className="input input-bordered input-info w-full"
-                />
 
-                <label className="label"></label>
-                <textarea
-                  {...register("feedbackText", { required: true })}
-                  className="textarea textarea-info w-full min-h-32"
-                  placeholder="Feedback Text"
-                ></textarea>
-
-                <label className="label">Rating</label>
+                <label className="label">Rating </label>
                 <Rating
                   emptySymbol={
                     <BsStar
@@ -105,6 +94,15 @@ const ClassFeedbackForm = () => {
                   fractions={2}
                   onClick={(value) => setRating(value)}
                 />
+                
+                <label className="label"></label>
+                <textarea
+                  {...register("feedbackText", { required: true })}
+                  className="textarea textarea-info w-full min-h-32"
+                  placeholder="Feedback Text"
+                ></textarea>
+
+               
 
                 <div className="mt-5 mx-auto flex justify-center">
                   <button

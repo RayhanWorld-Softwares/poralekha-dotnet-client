@@ -1,13 +1,12 @@
-
 import { FiEdit } from "react-icons/fi";
 import useLoggingUser from "../../hooks/useLoggingUser";
 
 const TeacherProfile = () => {
-const {loggingUser} = useLoggingUser()
+  const { loggingUser } = useLoggingUser();
 
   return (
-    <div className="flex text-white">
-      <div className="border w-1/4 flex justify-center items-center py-20 m-4 px-4 bg-[#162C46]">
+    <div className="flex text-white bg-[#001E2B] h-screen">
+      <div className=" w-1/4  flex justify-center py-4 my-4 px-4 bg-[#162C46]">
         <div>
           <div className="avatar flex justify-center items-center">
             <div className="w-24 rounded-full">

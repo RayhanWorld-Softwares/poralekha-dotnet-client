@@ -47,8 +47,7 @@ const AllClasses = () => {
                 )}{" "}
               </h2>
 
-              <h2>Author Name: {allClass?.name}</h2>
-              <h2>Author email: {allClass?.email}</h2>
+              <h2>Instructor: {allClass?.name}</h2>
               <h2>Price: ${allClass?.price}</h2>
               <h2>Total enrolment: coming soon</h2>
               <h3>

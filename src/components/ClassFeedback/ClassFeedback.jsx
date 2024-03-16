@@ -39,7 +39,7 @@ const ClassFeedback = () => {
                       <h2 className=" mt-8 text-xl font-bold">
                         {item?.userName}
                       </h2>
-                      <p className="">Class Title : {item?.title}</p>
+                      <p className="text-lg"> {item?.title}</p>
                       <p>{item?.feedbackText}</p>
                       <Rating
                         emptySymbol={

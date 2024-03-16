@@ -24,6 +24,7 @@ import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import FeedbackView from "../Pages/AdminDashboard/FeedbackView";
+import MyRequest from "../Pages/StudentDashboard/MyRequest";
 
 const router = createBrowserRouter([
   {
@@ -135,12 +136,22 @@ const router = createBrowserRouter([
         element: <MyEnrollClass />,
       },
       {
+        path: "/student-dashboard/my-enroll-class",
+        element: <MyEnrollClass />,
+      },
+      {
         path: "/student-dashboard/my-enroll-class/:id",
         element: <MyEnrollClassDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/Order/single/${params.id}`),
       },
       {
         path: "/student-dashboard/profile",
         element: <StudentProfile />,
+      },
+      {
+        path: "/student-dashboard/my-request",
+        element: <MyRequest />,
       },
     ],
   },

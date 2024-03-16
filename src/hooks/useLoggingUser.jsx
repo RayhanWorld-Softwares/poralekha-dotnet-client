@@ -29,7 +29,6 @@ const useLoggingUser = () => {
 
   const loggingUser = logging?.payload?.user;
 
-  console.log(loggingUser);
   return { loggingUser, loading, error };
 };
 

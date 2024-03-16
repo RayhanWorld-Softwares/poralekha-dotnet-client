@@ -42,12 +42,12 @@ const AdminAllClasses = () => {
   };
 
   return (
-    <div className="border">
+    <div className="bg-[#001E2B] h-screen text-white">
       {loading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead className="bg-[#F9FAFE]">
+          <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
               <th>Name</th>
               <th>Title </th>
@@ -91,7 +91,7 @@ const AdminAllClasses = () => {
                 {allClass?.status == "accepted" ? (
                   <th>
                     <Link to={`/admin-dashboard/class-feedback-view/${allClass?._id}`}>
-                    <button className="btn btn-primary btn-sm ">
+                    <button className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-sm">
                       See Progress
                     </button>
                     </Link>
@@ -121,7 +121,7 @@ const AdminAllClasses = () => {
                   <>
                     <th>
                       <button
-                        className="btn btn-primary btn-sm"
+                        className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-sm"
                         onClick={() => handleApproved(allClass._id)}
                       >
                         Approve
@@ -129,7 +129,7 @@ const AdminAllClasses = () => {
                     </th>
                     <th>
                       <button
-                        className="btn btn-primary btn-sm"
+                        className="btn border-none bg-[#d14249] hover:bg-[#c6131b] text-white btn-sm"
                         onClick={() => handleReject(allClass?._id)}
                       >
                         Reject

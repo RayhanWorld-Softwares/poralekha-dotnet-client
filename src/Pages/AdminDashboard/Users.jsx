@@ -29,22 +29,22 @@ const Users = () => {
   };
 
   return (
-    <div className="border">
+    <div className="bg-[#001E2B] h-screen text-white">
       {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         {/* search bar */}
-        <div className="flex justify-center items-center my-2">
+        <div className="flex justify-center items-center my-6">
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             type="text"
             placeholder="Search by user email"
-            className="input input-bordered input-info w-full max-w-xs "
+            className="input input-bordered input-info w-full max-w-xs bg-[#162C46] text-white"
           />
         </div>
         <table className="table">
           {/* head */}
-          <thead className="bg-[#F9FAFE]">
+          <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
               <th>Image</th>
               <th>name </th>
@@ -71,14 +71,14 @@ const Users = () => {
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td className="">
-                  <span className="border p-1 bg-gray-300 rounded-lg">
+                  <span className="border p-1 bg-gray-300 rounded-lg text-black">
                     {user?.role}
                   </span>
                 </td>
 
                 {user?.role === "admin" ? (
                   <th>
-                    <button disabled className="btn btn-primary btn-xs">
+                    <button disabled className="btn btn-primary btn-xs ">
                       Make Admin{" "}
                     </button>
                   </th>
@@ -86,7 +86,7 @@ const Users = () => {
                   <th>
                     <button
                       onClick={() => makeAdmin(user?._id)}
-                      className="btn btn-primary btn-xs"
+                      className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-xs"
                     >
                       Make Admin{" "}
                     </button>

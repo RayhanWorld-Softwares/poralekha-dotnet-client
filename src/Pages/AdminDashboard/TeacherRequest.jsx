@@ -8,12 +8,11 @@ const TeacherRequest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [teacherRequests, setTeacherRequests] = useState([]);
   const {loggingUser} = useLoggingUser()
-  console.log(loggingUser?._id);
 
   useEffect(() => {
     const fetchTeacherRequest = async () => {
       try {
-        const res = await axiosLocal.get("/api/teacher/request");
+        const res = await axiosLocal.get("/api/teacher");
         setTeacherRequests(res?.data?.payload?.teacherRequest);
       } catch (err) {
         console.error("Error fetching teacher request:", err);
@@ -48,12 +47,12 @@ const TeacherRequest = () => {
   };
 
   return (
-    <div className="border">
+    <div className=" bg-[#001E2B] h-screen text-white">
       {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead className="bg-[#F9FAFE]">
+          <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
               <th>Name</th>
               <th>Title </th>
@@ -100,7 +99,7 @@ const TeacherRequest = () => {
                     {" "}
                     <th>
                       <button
-                        className="btn btn-primary btn-xs"
+                        className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-xs"
                         onClick={() => handleApproved(teacherRequest?._id)}
                       >
                         Approved
@@ -108,7 +107,7 @@ const TeacherRequest = () => {
                     </th>
                     <th>
                       <button
-                        className="btn btn-primary btn-xs"
+                        className="btn border-none bg-[#d14249] hover:bg-[#c6131b] text-white btn-sm"
                         onClick={() => handleReject(teacherRequest?._id)}
                       >
                         Reject
@@ -118,7 +117,7 @@ const TeacherRequest = () => {
                 ) : (
                   <>
                     <th>
-                      <button className="btn btn-primary btn-xs" disabled>
+                      <button className="btn btn-primary btn-xs " disabled>
                         Approved
                       </button>
                     </th>

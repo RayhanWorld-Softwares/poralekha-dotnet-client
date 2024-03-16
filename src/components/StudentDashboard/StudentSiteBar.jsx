@@ -1,3 +1,4 @@
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { GiTeacher } from "react-icons/gi";
 import { PiUserSwitchBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
@@ -19,6 +20,14 @@ const StudentSiteBar = () => {
           <Link to={"/student-dashboard/my-enroll-class"}>
             <h3 className="flex items-center gap-3 pb-4">
               <GiTeacher size={20} /> <span>My Enroll Class</span>
+            </h3>
+          </Link>
+        </div>
+
+        <div className="text-base mb-5 border-b border-gray-800">
+          <Link to={"/student-dashboard/my-request"}>
+            <h3 className="flex items-center gap-3 pb-3">
+              <VscGitPullRequestGoToChanges  size={20} /> <span>My Request</span>
             </h3>
           </Link>
         </div>
