@@ -1,14 +1,13 @@
+import { BsStarFill, BsStar } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import Rating from "react-rating";
 
 const ClassFeedback = () => {
   const [feedback, setFeedback] = useState([]);
@@ -30,7 +29,6 @@ const ClassFeedback = () => {
 
   return (
     <div className="h-[70vh] border  bg-slate-900  flex justify-center items-center">
-
       <div className=" w-2/4  m-4 flex justify-center mx-auto ">
         <Swiper
           spaceBetween={30}
@@ -59,6 +57,17 @@ const ClassFeedback = () => {
                       </h2>
                       <p className="">Class Title : {item?.title}</p>
                       <p>{item?.feedbackText}</p>
+                      <Rating
+                        emptySymbol={
+                          <BsStar size={30} className="text-gray-400" />
+                        }
+                        fullSymbol={
+                          <BsStarFill size={30} className="text-yellow-400" />
+                        }
+                        fractions={2}
+                        initialRating={item?.rating}
+                        readonly
+                      />
                     </div>
                     {/* avater */}
                     <div className="avatar absolute -mt-12 ml-72">
