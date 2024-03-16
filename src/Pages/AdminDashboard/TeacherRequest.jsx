@@ -1,29 +1,20 @@
-import { useState, useEffect } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
 import useLoggingUser from "../../hooks/useLoggingUser";
+import { useQuery } from "@tanstack/react-query";
 
 const TeacherRequest = () => {
   const axiosLocal = useAxiosLocal();
-  const [isLoading, setIsLoading] = useState(true);
-  const [teacherRequests, setTeacherRequests] = useState([]);
-  const {loggingUser} = useLoggingUser()
+  const { loggingUser } = useLoggingUser();
 
-  useEffect(() => {
-    const fetchTeacherRequest = async () => {
-      try {
-        const res = await axiosLocal.get("/api/teacher");
-        setTeacherRequests(res?.data?.payload?.teacherRequest);
-      } catch (err) {
-        console.error("Error fetching teacher request:", err);
-        // setError(err);
-        throw new Error("Teacher request data fetch error");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchTeacherRequest();
-  }, [axiosLocal]);
+  const getTeacherRequest = async () => {
+    const res = await axiosLocal.get("/api/teacher");
+    return res?.data?.payload?.teacherRequest;
+  };
+  const { data: teacherRequests, refetch } = useQuery({
+    queryKey: ["teacherRequests"],
+    queryFn: getTeacherRequest,
+  });
 
   const handleStatusUpdate = async (id, status) => {
     try {
@@ -39,16 +30,17 @@ const TeacherRequest = () => {
   const handleApproved = async (id) => {
     await handleStatusUpdate(id, "accepted");
     await axiosLocal.put(`/api/users/update/${loggingUser?._id}`, {
-      role: "teacher"
-    })
+      role: "teacher",
+    });
+    refetch();
   };
   const handleReject = async (id) => {
     await handleStatusUpdate(id, "rejected");
+    refetch();
   };
 
   return (
     <div className=" bg-[#001E2B] h-screen text-white">
-      {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -63,7 +55,7 @@ const TeacherRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {teacherRequests.map((teacherRequest) => (
+            {teacherRequests?.map((teacherRequest) => (
               <tr key={teacherRequest._id}>
                 <td>
                   <div className="flex items-center gap-3 ">

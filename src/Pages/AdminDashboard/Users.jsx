@@ -1,36 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 
 const Users = () => {
   const axiosLocal = useAxiosLocal();
-  const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
+  const getUsers = async () => {
+    const res = await axiosLocal.get(`/api/users?email=${searchValue}`);
+    return res?.data?.payload?.users;
+  };
+  const { data: users, refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axiosLocal.get(`/api/users?email=${searchValue}`);
-        setUsers(res?.data?.payload?.users);
-      } catch (err) {
-        console.error("Error fetching users request:", err);
-        throw new Error("users data fetch error");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchUsers();
-  }, [axiosLocal, searchValue]);
+    refetch();
+  }, [searchValue, refetch]);
 
   const makeAdmin = async (id) => {
-    await axiosLocal.put(`/api/users/update/${id}`, {
+    const res = await axiosLocal.put(`/api/users/update/${id}`, {
       role: "admin",
     });
+    if (res?.data.success === true) {
+      refetch();
+    }
   };
 
   return (
     <div className="bg-[#001E2B] h-screen text-white">
-      {isLoading && <p>Loading...</p>}
       <div className="overflow-x-auto">
         {/* search bar */}
         <div className="flex justify-center items-center my-6">

@@ -17,7 +17,7 @@ const UpdateClasses = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-  const image = data.image[0];
+    const image = data.image[0];
     try {
       const imageData = await imageUpload(image);
       const ClassInfo = {

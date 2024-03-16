@@ -1,33 +1,29 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const AdminAllClasses = () => {
-  const [allClasses, setAllClasses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [allClasses, setAllClasses] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const axiosLocal = useAxiosLocal();
 
-  useEffect(() => {
-    const fetchAllClass = async () => {
-      try {
-        setLoading(true);
-        const res = await axiosLocal.get("/api/class/");
-        setAllClasses(res?.data?.payload);
-      } catch (error) {
-        throw new Error("fetch all class from teacher dashboard error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAllClass();
-  }, [axiosLocal]);
+  const getAllClasses = async () => {
+    const res = await axiosLocal.get("/api/class/");
+    return res?.data?.payload;
+  };
+  const { data: allClasses, refetch } = useQuery({
+    queryKey: ["allClasses"],
+    queryFn: getAllClasses,
+  });
 
   const handleStatusUpdate = async (id, status) => {
     try {
       const updateStatus = { status };
       const res = await axiosLocal.put(`/api/class/${id}`, updateStatus);
       if (res?.data?.payload?.status === status) {
+        refetch();
         toast.success(`class (${status})`);
       }
     } catch (error) {
@@ -43,7 +39,7 @@ const AdminAllClasses = () => {
 
   return (
     <div className="bg-[#001E2B] h-screen text-white">
-      {loading && <p>Loading...</p>}
+      {/* {loading && <p>Loading...</p>} */}
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -58,7 +54,7 @@ const AdminAllClasses = () => {
             </tr>
           </thead>
           <tbody>
-            {allClasses.map((allClass) => (
+            {allClasses?.map((allClass) => (
               <tr key={allClass._id}>
                 <td>
                   <div className="flex items-center gap-3 ">
@@ -88,12 +84,14 @@ const AdminAllClasses = () => {
                 </td>
 
                 {/* see progress */}
-                {allClass?.status == "accepted" ? (
+                {allClass?.status === "accepted" ? (
                   <th>
-                    <Link to={`/admin-dashboard/class-feedback-view/${allClass?._id}`}>
-                    <button className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-sm">
-                      See Progress
-                    </button>
+                    <Link
+                      to={`/admin-dashboard/class-feedback-view/${allClass?._id}`}
+                    >
+                      <button className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white   btn-sm">
+                        See Progress
+                      </button>
                     </Link>
                   </th>
                 ) : (
@@ -104,20 +102,7 @@ const AdminAllClasses = () => {
                   </th>
                 )}
 
-                {allClass?.status === "accepted" ? (
-                  <>
-                    <th>
-                      <button className="btn btn-primary btn-sm" disabled>
-                        Approve
-                      </button>
-                    </th>
-                    <th>
-                      <button className="btn btn-primary btn-sm" disabled>
-                        Reject
-                      </button>
-                    </th>
-                  </>
-                ) : (
+                {allClass?.status === "pending" ? (
                   <>
                     <th>
                       <button
@@ -132,6 +117,19 @@ const AdminAllClasses = () => {
                         className="btn border-none bg-[#d14249] hover:bg-[#c6131b] text-white btn-sm"
                         onClick={() => handleReject(allClass?._id)}
                       >
+                        Reject
+                      </button>
+                    </th>
+                  </>
+                ) : (
+                  <>
+                    <th>
+                      <button className="btn btn-primary btn-sm" disabled>
+                        Approve
+                      </button>
+                    </th>
+                    <th>
+                      <button className="btn btn-primary btn-sm" disabled>
                         Reject
                       </button>
                     </th>
