@@ -90,7 +90,7 @@ const AdminAllClasses = () => {
                 {/* see progress */}
                 {allClass?.status == "accepted" ? (
                   <th>
-                    <Link to={`/admin-dashboard/class-feedback/${allClass?._id}`}>
+                    <Link to={`/admin-dashboard/class-feedback-view/${allClass?._id}`}>
                     <button className="btn btn-primary btn-sm ">
                       See Progress
                     </button>

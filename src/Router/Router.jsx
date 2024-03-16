@@ -23,6 +23,7 @@ import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
 import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
+import FeedbackView from "../Pages/AdminDashboard/FeedbackView";
 
 const router = createBrowserRouter([
   {
@@ -87,10 +88,10 @@ const router = createBrowserRouter([
         path: "/admin-dashboard/profile",
         element: <AdminProfile />,
       },
-      // {
-      //   path: "/admin-dashboard/class-feedback/:id",
-      //   element: <ClassFeedback />,
-      // },
+      {
+        path: "/admin-dashboard/class-feedback-view/:id",
+        element: <FeedbackView />,
+      },
     ],
   },
 

@@ -1,6 +1,4 @@
 import { BsStarFill, BsStar } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -8,24 +6,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Rating from "react-rating";
+import useFeedback from "../../hooks/useFeedback";
 
 const ClassFeedback = () => {
-  const [feedback, setFeedback] = useState([]);
-  const axiosLocal = useAxiosLocal();
-  console.log(feedback);
-
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      try {
-        const res = await axiosLocal.get("/api/feedback");
-        setFeedback(res?.data?.payload);
-      } catch (err) {
-        console.error("Error fetching feedback request:", err);
-        throw new Error("feedback data fetch error");
-      }
-    };
-    fetchFeedback();
-  }, [axiosLocal]);
+  const { feedbacks } = useFeedback();
 
   return (
     <div className="h-[70vh] border  bg-slate-900  flex justify-center items-center">
@@ -44,7 +28,7 @@ const ClassFeedback = () => {
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
         >
-          {feedback.map((item) => (
+          {feedbacks.map((item) => (
             <SwiperSlide key={item._id}>
               <div>
                 {/* feeback card */}
