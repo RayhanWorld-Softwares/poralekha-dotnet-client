@@ -43,12 +43,12 @@ const UpdateClasses = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen flex bg-cover bg-center bg-[#f9fdff]">
+      <div className="w-full min-h-screen flex bg-cover bg-center bg-[#001E2B] h-screen text-white">
         <div className="hero">
           <div className="hero-content flex items-center flex-col md:flex-row  rounded-xl justify-between gap-x-36">
             {/* form area */}
             <div className="card w-full  flex-shrink-0 shadow-2xl">
-              <div className="card-body  md:px-16 bg-white rounded-md">
+              <div className="card-body  md:px-16 bg-[#162C46] text-white rounded-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="">
                   <h2 className="text-center text-3xl font-bold my-5">
                     Update to Class
@@ -61,7 +61,7 @@ const UpdateClasses = () => {
                         defaultValue={payload?.title}
                         {...register("title", { required: true })}
                         placeholder="Title"
-                        className="input input-bordered "
+                        className="input input-bordered bg-[#162C46] border-white focus:border-[#006ce1] "
                       />
                       {errors.name && (
                         <span className="text-[#006ce1]">
@@ -76,7 +76,7 @@ const UpdateClasses = () => {
                         type="text"
                         {...register("price", { required: true })}
                         placeholder="Price $"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full bg-[#162C46] border-white focus:border-[#006ce1] "
                       />
                       {errors.name && (
                         <span className="text-[#006ce1]">
@@ -106,7 +106,7 @@ const UpdateClasses = () => {
                         defaultValue={payload?.description}
                         {...register("description", { required: true })}
                         placeholder="Description"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full bg-[#162C46] border-white focus:border-[#006ce1] "
                       />
                       {errors.name && (
                         <span className="text-[#006ce1]">

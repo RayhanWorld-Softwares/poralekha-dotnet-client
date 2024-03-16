@@ -4,13 +4,13 @@ import { BsStarFill, BsStar } from "react-icons/bs";
 
 const FeedbackView = () => {
   const { feedbacks } = useFeedback();
-  console.log(feedbacks);
+
 
   return (
-    <div>
+    <div className="bg-[#001E2B] h-screen text-white">
       <table className="table">
         {/* head */}
-        <thead className="bg-[#F9FAFE]">
+        <thead className="bg-[#162C46] text-white">
           <tr className="uppercase font-bold">
             <th>Image</th>
             <th>name </th>

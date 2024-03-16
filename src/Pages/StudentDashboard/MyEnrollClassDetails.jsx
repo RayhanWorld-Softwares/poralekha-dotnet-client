@@ -18,15 +18,15 @@ const MyEnrollClassDetails = () => {
   });
 
   return (
-    <div>
+    <div className="bg-[#001E2B] h-screen text-white">
       {/* TED Feedback section */}
       <ClassFeedbackForm payload={payload} />
 
       {/* assignment info */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <table className="table">
           {/* head */}
-          <thead className="bg-[#F9FAFE]">
+          <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
               <th>Title </th>
               <th>description</th>
@@ -56,7 +56,7 @@ const MyEnrollClassDetails = () => {
                 </td>
 
                 <th>
-                  <button className="btn btn-primary btn-sm ">Submit</button>
+                  <button className="btn btn-sm border-none bg-[#61adff] hover:bg-[#006ce1] text-white  ">Submit</button>
                 </th>
               </tr>
             ))}

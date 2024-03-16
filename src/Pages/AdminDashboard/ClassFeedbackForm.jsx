@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import Rating from "react-rating";
 
-const ClassFeedbackForm = ({payload}) => {
+const ClassFeedbackForm = ({ payload }) => {
   const { user } = useAuth();
   const axiosLocal = useAxiosLocal();
   const [rating, setRating] = useState(0);
@@ -44,7 +44,7 @@ const ClassFeedbackForm = ({payload}) => {
   };
 
   return (
-    <div>
+    <div className="bg-[#001E2B] ">
       <Helmet>
         <title>Poralekha | Feedback</title>
       </Helmet>
@@ -62,8 +62,8 @@ const ClassFeedbackForm = ({payload}) => {
         {/* Modal */}
         <div className="">
           <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-          <div className="modal" role="dialog">
-            <div className="modal-box relative p-12">
+          <div className="modal " role="dialog">
+            <div className="modal-box relative p-12 bg-[#001E2B]  ">
               <label
                 htmlFor="my_modal_6"
                 className="absolute top-0 right-0 p-4 cursor-pointer "
@@ -94,20 +94,18 @@ const ClassFeedbackForm = ({payload}) => {
                   fractions={2}
                   onClick={(value) => setRating(value)}
                 />
-                
+
                 <label className="label"></label>
                 <textarea
                   {...register("feedbackText", { required: true })}
-                  className="textarea textarea-info w-full min-h-32"
+                  className="textarea textarea-info w-full min-h-32 bg-[#162C46] border-white focus:border-[#006ce1]"
                   placeholder="Feedback Text"
                 ></textarea>
-
-               
 
                 <div className="mt-5 mx-auto flex justify-center">
                   <button
                     type="submit"
-                    className="btn mr-5 bg-[#61adff] hover:bg-[#006ce1] text-white"
+                    className="btn mr-5 bg-[#61adff] hover:bg-[#006ce1] text-white border-none"
                   >
                     Send Now
                   </button>

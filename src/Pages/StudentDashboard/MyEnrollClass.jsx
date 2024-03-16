@@ -23,7 +23,6 @@ const MyEnrollClass = () => {
     queryFn: getEnrolledClass,
   });
   
-  console.log(enrolledClasses);
 
   return (
     <div className=" bg-[#001E2B] h-screen">

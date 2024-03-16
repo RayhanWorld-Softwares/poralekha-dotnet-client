@@ -11,6 +11,7 @@ const ClassAssignment = () => {
     register,
     reset,
     handleSubmit,
+    // eslint-disable-next-line no-unused-vars
     formState: { errors },
   } = useForm();
 
@@ -43,7 +44,7 @@ const ClassAssignment = () => {
       <div className="">
         <input type="checkbox" id="my_modal_6" className="modal-toggle" />
         <div className="modal" role="dialog">
-          <div className="modal-box relative p-12">
+          <div className="modal-box relative p-12 bg-[#162C46] text-white">
             <label
               htmlFor="my_modal_6"
               className="absolute top-0 right-0 p-4 cursor-pointer "
@@ -59,20 +60,20 @@ const ClassAssignment = () => {
                 {...register("title", { required: true })}
                 type="text"
                 placeholder="Assignment Title"
-                className="input input-bordered input-info w-full"
+                className="input input-bordered input-info w-full text-black"
               />
 
               <label className="label">End Date</label>
               <input
                 {...register("endDate", { required: true })}
                 type="date"
-                className="input input-bordered input-info w-full"
+                className="input input-bordered input-info w-full text-black"
               />
 
               <label className="label"></label>
               <textarea
                 {...register("description", { required: true })}
-                className="textarea textarea-info w-full min-h-24"
+                className="textarea textarea-info w-full min-h-24 text-black"
                 placeholder="Description"
               ></textarea>
 
