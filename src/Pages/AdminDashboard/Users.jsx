@@ -29,7 +29,7 @@ const Users = () => {
   };
 
   return (
-    <div className="bg-[#001E2B] h-screen text-white">
+    <div className="bg-[#001E2B] min-h-screen text-white pl-3">
       <div className="overflow-x-auto">
         {/* search bar */}
         <div className="flex justify-center items-center my-6">
@@ -70,7 +70,7 @@ const Users = () => {
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td className="">
-                  <span className="border p-1 bg-gray-300 rounded-lg text-black">
+                  <span className=" text-white rounded-lg">
                     {user?.role}
                   </span>
                 </td>

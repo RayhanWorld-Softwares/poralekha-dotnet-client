@@ -1,12 +1,17 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import ClassFeedbackForm from "../AdminDashboard/ClassFeedbackForm";
 import { useLoaderData } from "react-router-dom";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Certificate from "../../components/Certificate/Certificate";
 
 const MyEnrollClassDetails = () => {
   const axiosLocal = useAxiosLocal();
   const { payload } = useLoaderData();
+  console.log(payload);
+
 
   const getAssignment = async () => {
     const res = await axiosLocal.get(`/api/assignment`);
@@ -19,6 +24,17 @@ const MyEnrollClassDetails = () => {
 
   return (
     <div className="bg-[#001E2B] h-screen text-white">
+      {/* certificate  */}
+      <PDFDownloadLink document={<Certificate courseName={payload?.classTitle} name={payload?.name} />} fileName="certificate.pdf">
+        {({ loading, url, error, blob }) =>
+          loading ? (
+            <button >Loading Document ...</button>
+          ) : (
+            <button className="btn flex justify-center items-center mx-auto ">Download Now!</button>
+          )
+        }
+      </PDFDownloadLink>
+
       {/* TED Feedback section */}
       <ClassFeedbackForm payload={payload} />
 
@@ -56,7 +72,9 @@ const MyEnrollClassDetails = () => {
                 </td>
 
                 <th>
-                  <button className="btn btn-sm border-none bg-[#61adff] hover:bg-[#006ce1] text-white  ">Submit</button>
+                  <button className="btn btn-sm border-none bg-[#61adff] hover:bg-[#006ce1] text-white  ">
+                    Submit
+                  </button>
                 </th>
               </tr>
             ))}

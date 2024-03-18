@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const TeacherSideBar = () => {
   return (
     <div>
-      <div className="h-screen bg-[#081B29] text-white p-8">
+      <div className="h-screen bg-[#081B29] text-white p-8 fixed">
         <div className="flex items-center gap-3 mb-12 shadow-xl">
           <img
             className="w-16"

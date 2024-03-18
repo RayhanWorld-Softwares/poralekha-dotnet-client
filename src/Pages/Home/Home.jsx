@@ -9,7 +9,7 @@ const Home = () => {
       <Banner />
       <Collaborators />
       <TeachersJoin />
-      <ClassFeedback/>
+      <ClassFeedback />
     </div>
   );
 };

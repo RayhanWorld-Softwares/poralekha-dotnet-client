@@ -7,7 +7,7 @@ const NavbarLink = () => {
   const { user } = useAuth();
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col lg:flex-row gap-4">
       <NavLink
         to="/"
         className={({ isActive, isPending }) =>

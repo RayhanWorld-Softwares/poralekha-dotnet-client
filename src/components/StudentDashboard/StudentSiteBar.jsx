@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const StudentSiteBar = () => {
   return (
     <div>
-      <div className="h-screen bg-[#081B29] text-white p-8">
+      <div className="h-screen bg-[#081B29] text-white p-8 fixed ">
         <div className="flex items-center gap-3 mb-12 shadow-xl">
           <img
             className="w-16"
@@ -27,7 +27,7 @@ const StudentSiteBar = () => {
         <div className="text-base mb-5 border-b border-gray-800">
           <Link to={"/student-dashboard/my-request"}>
             <h3 className="flex items-center gap-3 pb-3">
-              <VscGitPullRequestGoToChanges  size={20} /> <span>My Request</span>
+              <VscGitPullRequestGoToChanges size={20} /> <span>My Request</span>
             </h3>
           </Link>
         </div>

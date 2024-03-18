@@ -39,7 +39,7 @@ const AdminAllClasses = () => {
 
   return (
     <div className="bg-[#001E2B] h-screen text-white">
-      {/* {loading && <p>Loading...</p>} */}
+     
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

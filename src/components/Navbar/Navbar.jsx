@@ -36,7 +36,7 @@ const Navbar = () => {
                 {" "}
                 <ul
                   tabIndex={0}
-                  className="menu absolute flex h-auto  menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box  md:w-[600px] "
+                  className="menu absolute md:h-[200px] menu-sm dropdown-content mt-3 z-[10] p-6 shadow bg-base-100 rounded-box  w-[200px] "
                 >
                   {/* all nav links */}
                   <NavbarLink />
