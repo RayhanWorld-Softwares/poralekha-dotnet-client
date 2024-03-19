@@ -1,29 +1,31 @@
+import Container from "../Container/Container";
+
 const Banner = () => {
   return (
-    <div className="flex justify-between px-24 items-center min-h-[90vh]">
-      {/* content area */}
-      <div className="">
-        <h2 className="text-5xl font-bold">
-          Find a Job With Your Interest and Abilities{" "}
-        </h2>
-        <p className="my-5">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente
-          expedita suscipit laudantium eos quisquam natus qui, corporis
-          molestias! Quod, odio.
-        </p>
+    <Container>
+      <div className="py-16 md:flex justify-between items-center md:min-h-[90vh]">
+        {/* content area */}
+        <div className="">
+          <h2 className="text-3xl lg:text-5xl font-bold">
+           Explore Our Range of Dynamic Courses Today!
+          </h2>
+          <p className="my-5">
+          Embark on a Journey of Learning Excellence with Our Wide Selection of Courses! From Skill Enhancement to Career Advancement, Discover Your Path to Success. Explore Now!
+          </p>
 
-        <div>
-          <button className="btn bg-[#61adff] hover:bg-[#006ce1] text-white ">
-            Get Stated
-          </button>
+          <div>
+            <button className="btn bg-[#61adff] hover:bg-[#006ce1] text-white ">
+              Get Stated
+            </button>
+          </div>
+        </div>
+
+        {/* banner image */}
+        <div className="mt-2.5 hidden md:block">
+          <img src="https://i.postimg.cc/MKB0WdNp/banner.jpg" alt="" />
         </div>
       </div>
-
-      {/* banner image */}
-      <div className="mt-2.5">
-        <img src="https://i.postimg.cc/MKB0WdNp/banner.jpg" alt="" />
-      </div>
-    </div>
+    </Container>
   );
 };
 

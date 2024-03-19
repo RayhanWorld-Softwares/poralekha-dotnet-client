@@ -3,12 +3,12 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import useLoggingUser from "../../hooks/useLoggingUser";
+import Container from "../../components/Container/Container";
 
 const TechOnPoralekha = () => {
   const { user } = useAuth();
-  const axiosLocal = useAxiosLocal()
-  const {loggingUser} = useLoggingUser()
-  console.log(loggingUser?._id);
+  const axiosLocal = useAxiosLocal();
+  const { loggingUser } = useLoggingUser();
 
   const {
     register,
@@ -29,12 +29,12 @@ const TechOnPoralekha = () => {
         category: data.category,
         experience: data.experience,
         status: "pending",
-        userId: loggingUser?._id
+        userId: loggingUser?._id,
       };
       const res = await axiosLocal.post("/api/teacher", userInfo);
-      if(res?.data.success === true){
-        toast.success("Application Submit Successfully ")
-        reset()
+      if (res?.data.success === true) {
+        toast.success("Application Submit Successfully ");
+        reset();
       }
     } catch (error) {
       console.log("Error", error);
@@ -42,12 +42,13 @@ const TechOnPoralekha = () => {
   };
 
   return (
-    <>
+    <div className="bg-[#f9fdff]">
+    <Container>
       <div className="w-full min-h-screen flex bg-cover bg-center bg-[#f9fdff]">
         <div className="hero">
-          <div className="hero-content flex items-center flex-col md:flex-row  rounded-xl justify-between gap-x-36">
+          <div className="hero-content flex items-center flex-col lg:flex-row  rounded-xl justify-between xl:gap-x-36 ">
             {/* image area */}
-            <div className="text-center hidden md:flex lg:text-left w-1/2">
+            <div className="text-center hidden lg:flex lg:text-left w-1/2">
               <img
                 className="w-[85%]"
                 src="https://i.postimg.cc/q7MMyVSM/bigstock-vector-application-form-clipart-white-448033435-1200px-removebg-preview.png"
@@ -57,7 +58,7 @@ const TechOnPoralekha = () => {
 
             {/* form area */}
             <div className="card w-1/1  flex-shrink-0 shadow-2xl">
-              <div className="card-body w-[380px] md:w-[450px] md:px-16 bg-white rounded-md">
+              <div className="card-body  md:w-[450px] md:px-16 bg-white rounded-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="">
                   <h2 className="text-center text-3xl font-bold mt-5">
                     Teaching Now
@@ -149,7 +150,10 @@ const TechOnPoralekha = () => {
                   </select>
 
                   <div className="mt-6 flex justify-center">
-                    <button type="submit" className="btn   bg-[#61adff] hover:bg-[#006ce1] text-white">
+                    <button
+                      type="submit"
+                      className="btn   bg-[#61adff] hover:bg-[#006ce1] text-white"
+                    >
                       Submit for review{" "}
                     </button>
                   </div>
@@ -159,7 +163,8 @@ const TechOnPoralekha = () => {
           </div>
         </div>
       </div>
-    </>
+    </Container>
+    </div>
   );
 };
 
