@@ -25,6 +25,7 @@ import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
 import FeedbackView from "../Pages/AdminDashboard/FeedbackView";
 import MyRequest from "../Pages/StudentDashboard/MyRequest";
+import ModuleDetails from "../components/TeacherDashboard/ModuleDetails";
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
       {
         path: "/teacher-dashboard/my-class/:id",
         element: <MyClassDetails />,
+      },
+      {
+        path: "/teacher-dashboard/module-details/:id",
+        element: <ModuleDetails />,
       },
     ],
   },

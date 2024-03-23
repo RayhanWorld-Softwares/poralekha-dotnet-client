@@ -25,7 +25,7 @@ const MyEnrollClass = () => {
   
 
   return (
-    <div className=" bg-[#001E2B] h-screen">
+    <div className=" bg-[#001E2B] h-screen w-full flex justify-center">
       <div className="pt-24 ">
         {enrolledClasses?.map((enrolledClass) => (
           <div

@@ -12,7 +12,6 @@ const MyClass = () => {
 
   const [myClasses, setMyClasses] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(myClasses);
 
   useEffect(() => {
     const fetchMyClass = async () => {
@@ -37,7 +36,6 @@ const MyClass = () => {
   }
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -66,70 +64,72 @@ const MyClass = () => {
   };
 
   return (
-    <div className="  bg-[#001E2B] h-screen text-white">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12  h-screen ">
-      {myClasses?.map((myClass) => (
-        <div key={myClass?._id}>
-          <div className="card card-compact bg-[#162C46] shadow-xl">
-            <figure>
-              <img
-                src={myClass?.image}
-                alt="blog"
-                className="w-full h-[200px]"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">
-                {myClass?.title?.length > 35 ? (
-                  <p>{myClass?.title.slice(0, 30)}</p>
-                ) : (
-                  <p>{myClass?.title}</p>
-                )}{" "}
-              </h2>
+    <div className="  bg-[#001E2B] min-h-screen  text-white">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12 ">
+        {myClasses?.map((myClass) => (
+          <div key={myClass?._id}>
+            <div className="card card-compact bg-[#162C46] shadow-xl">
+              <figure>
+                <img
+                  src={myClass?.image}
+                  alt="blog"
+                  className="w-full h-[200px]"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">
+                  {myClass?.title?.length > 35 ? (
+                    <p>{myClass?.title.slice(0, 30)}</p>
+                  ) : (
+                    <p>{myClass?.title}</p>
+                  )}{" "}
+                </h2>
 
-              <h2>Author Name: {myClass?.name}</h2>
-              <h2>Author email: {myClass?.email}</h2>
-              <h2>Price: ${myClass?.price}</h2>
-              <h2>Status: {myClass?.status}</h2>
-              <h3>
-                {myClass?.description.length > 80 ? (
-                  <p>{myClass?.description.slice(0,80)}...</p>
-                ) : (
-                  <p>{myClass?.description}</p>
-                )}{" "}
-              </h3>
+                <h2>Author Name: {myClass?.name}</h2>
+                <h2>Author email: {myClass?.email}</h2>
+                <h2>Price: ${myClass?.price}</h2>
+                <h2>Status: {myClass?.status}</h2>
+                <h3>
+                  {myClass?.description.length > 80 ? (
+                    <p>{myClass?.description.slice(0, 80)}...</p>
+                  ) : (
+                    <p>{myClass?.description}</p>
+                  )}{" "}
+                </h3>
 
-              <div className="flex justify-between">
-                {myClass?.status === "accepted" ? (
-                  <Link to={`/teacher-dashboard/my-class/${myClass?._id}`}>
-                    <button className="btn btn-sm">See Details</button>
-                  </Link>
-                ) : (
-                  <button disabled className="btn btn-sm">
-                    See Details
-                  </button>
-                )}
-
-                <div className="flex gap-6 items-center shadow-2xl">
-                  <Link to={`/teacher-dashboard/update-class/${myClass?._id}`}>
-                    <button className="btn btn-sm">
-                      <FiEdit size={20} />
+                <div className="flex justify-between">
+                  {myClass?.status === "accepted" ? (
+                    <Link to={`/teacher-dashboard/my-class/${myClass?._id}`}>
+                      <button className="btn btn-sm">See Details</button>
+                    </Link>
+                  ) : (
+                    <button disabled className="btn btn-sm">
+                      See Details
                     </button>
-                  </Link>
+                  )}
 
-                  <button
-                    className="btn btn-sm"
-                    onClick={() => handleDelete(myClass?._id)}
-                  >
-                    <MdFolderDelete size={30} />
-                  </button>
+                  <div className="flex gap-6 items-center shadow-2xl">
+                    <Link
+                      to={`/teacher-dashboard/update-class/${myClass?._id}`}
+                    >
+                      <button className="btn btn-sm">
+                        <FiEdit size={20} />
+                      </button>
+                    </Link>
+
+                    <button
+                      className="btn btn-sm"
+                      onClick={() => handleDelete(myClass?._id)}
+                    >
+                      <MdFolderDelete size={30} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,12 +1,9 @@
-// import { useEffect, useState } from "react";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 const AdminAllClasses = () => {
-  // const [allClasses, setAllClasses] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const axiosLocal = useAxiosLocal();
 
   const getAllClasses = async () => {
