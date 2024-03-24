@@ -42,6 +42,9 @@ const MyEnrollClass = () => {
               <h2 className="text-xl font-semibold text-white ">
                 {enrolledClass?.teacherName}
               </h2>
+              <h2 className="text-xl font-semibold text-white ">
+                {enrolledClass?.classId}
+              </h2>
 
               <Link
                 to={`/student-dashboard/my-enroll-class/${enrolledClass?._id}`}

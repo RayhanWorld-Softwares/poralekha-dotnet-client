@@ -4,7 +4,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import toast from "react-hot-toast";
 
-const AddModule = ({ classId, refetch }) => {
+const AddModule = ({ classId }) => {
   const axiosLocal = useAxiosLocal();
 
   const {
@@ -24,7 +24,7 @@ const AddModule = ({ classId, refetch }) => {
     if (res?.data.success === true) {
       toast.success("Module Created Successfully ");
       reset();
-      refetch();
+      // refetch();
       document.getElementById("my_modal_8").checked = false;
     }
   };
