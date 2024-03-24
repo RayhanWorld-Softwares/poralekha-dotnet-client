@@ -25,12 +25,12 @@ const MyEnrollClass = () => {
   
 
   return (
-    <div className=" bg-[#001E2B] h-screen w-full flex justify-center">
+    <div className=" bg-[#001E2B] min-h-screen w-full flex justify-center">
       <div className="pt-24 ">
         {enrolledClasses?.map((enrolledClass) => (
           <div
             key={enrolledClass?._id}
-            className=" bg-[#162C46]  flex  w-fit p-4 rounded-lg"
+            className=" bg-[#162C46]  flex  w-fit p-4 rounded-lg gap-5 mt-5"
           >
             <div className="w-72">
               <img src={enrolledClass?.image} alt="enrolled class image" />
@@ -41,9 +41,6 @@ const MyEnrollClass = () => {
               </h2>
               <h2 className="text-xl font-semibold text-white ">
                 {enrolledClass?.teacherName}
-              </h2>
-              <h2 className="text-xl font-semibold text-white ">
-                {enrolledClass?.classId}
               </h2>
 
               <Link

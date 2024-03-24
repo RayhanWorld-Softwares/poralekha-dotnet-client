@@ -4,24 +4,31 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const Module = ({refetch, moduleId}) => {
-  console.log({moduleId});
+const Module = ({ refetch, moduleId }) => {
   const [title, setTitle] = useState("");
   const [video, setVideo] = useState(null);
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pdf, setPdf] = useState(null);
 
   const uploadFile = async (type, timestamp, signature) => {
-    const folder = type === "image" ? "images" : "videos";
+    const folder =
+      type === "image" ? "images" : type === "video" ? "videos" : "pdfs";
     const data = new FormData();
-    data.append("file", type === "image" ? img : video);
+    data.append(
+      "file",
+      type === "image" ? img : type === "video" ? video : pdf
+    );
+
     data.append("timestamp", timestamp);
     data.append("signature", signature);
     data.append("api_key", 698939185558578); //TODO: api_key set to .env.local file in
     data.append("folder", folder);
     try {
       let cloudName = "dudjn6epk"; //TODO: cloud name set to .env.local file in
-      let resourceType = type === "image" ? "image" : "video";
+      const resourceType =
+        type === "image" ? "image" : type === "video" ? "video" : "raw"; // Determine resource type
+
       let api = `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`;
 
       const res = await axios.post(api, data);
@@ -51,11 +58,18 @@ const Module = ({refetch, moduleId}) => {
       // Get signature for Image upload
       const { timestamp: imgTimestamp, signature: imgSignature } =
         await getSignatureForUpload("images");
+
       // Get signature for Video upload
       const { timestamp: videoTimestamp, signature: videoSignature } =
         await getSignatureForUpload("videos");
+
+      // Get signature for pdf upload
+      const { timestamp: pdfTimestamp, signature: pdfSignature } =
+        await getSignatureForUpload("pdfs"); // Get signature for PDF upload
+
       // Upload image file
       const imgUrl = await uploadFile("image", imgTimestamp, imgSignature);
+
       // Upload video file
       const videoUrl = await uploadFile(
         "video",
@@ -63,23 +77,29 @@ const Module = ({refetch, moduleId}) => {
         videoSignature
       );
 
+      // Upload pdf file
+      const pdfUrl = await uploadFile("pdf", pdfTimestamp, pdfSignature);
+
       // send backend api request
       const response = await axios.post(`http://localhost:5000/api/videos`, {
         title,
         imgUrl,
         videoUrl,
-        moduleId
+        pdfUrl,
+        moduleId,
       });
+      console.log({ response });
       if (response.status === 200) {
         toast.success("File upload Successfully ");
         setLoading(false);
         document.getElementById("my_modal_7").checked = false;
-        refetch()
+        refetch();
       }
       // reset status
-      setTitle("")
+      setTitle("");
       setImg(null);
       setVideo(null);
+      setPdf(null);
     } catch (error) {
       console.log(error);
     }
@@ -150,6 +170,19 @@ const Module = ({refetch, moduleId}) => {
                   onChange={(e) => setImg((prev) => e.target.files[0])}
                 />
               </div>
+              <br />
+              <div>
+                <label htmlFor="pdf">PDF:</label>
+                <br />
+                <input
+                  required
+                  type="file"
+                  accept=".pdf"
+                  id="pdf"
+                  onChange={(e) => setPdf((prev) => e.target.files[0])}
+                />
+              </div>
+
               <div className="flex flex-col ">
                 {loading && (
                   <progress className="progress text-white bg-white w-56 my-5"></progress>

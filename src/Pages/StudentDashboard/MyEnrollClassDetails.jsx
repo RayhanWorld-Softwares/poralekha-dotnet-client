@@ -105,7 +105,7 @@ const MyEnrollClassDetails = () => {
       </div> */}
 
       {/* module section */}
-      <div className="flex gap-5 min-h-screen">
+      <div className="flex gap-10 min-h-screen">
         {/* video area */}
         <div className=" w-4/6 ml-7 ">
           <ReactPlayer
