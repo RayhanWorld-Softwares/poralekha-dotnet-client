@@ -8,6 +8,14 @@ import { useState } from "react";
 // import moment from "moment";
 // import { PDFDownloadLink } from "@react-pdf/renderer";
 // import Certificate from "../../components/Certificate/Certificate";
+import { pdfjs } from "react-pdf";
+import PdfDocumentViewer from "../../components/PdfDocumentViewer/PdfDocumentViewer";
+
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
 
 const MyEnrollClassDetails = () => {
   const axiosLocal = useAxiosLocal();
@@ -108,7 +116,7 @@ const MyEnrollClassDetails = () => {
       <div className="flex gap-10 min-h-screen">
         {/* video area */}
         <div className=" w-4/6 ml-7 ">
-          <ReactPlayer
+          {/* <ReactPlayer
             controls
             playIcon
             playing
@@ -116,7 +124,21 @@ const MyEnrollClassDetails = () => {
             width={"100%"}
             height={"400px"}
             url={selectedVideoUrl}
-          />
+          /> */}
+
+          {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
+            <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
+          ) : (
+            <ReactPlayer
+              controls
+              playIcon
+              playing
+              pip={true}
+              width={"100%"}
+              height={"400px"}
+              url={selectedVideoUrl}
+            />
+          )}
         </div>
 
         {/* module list */}
@@ -137,7 +159,7 @@ const MyEnrollClassDetails = () => {
                     <div
                       className="cursor-pointer"
                       key={moduleVideo?._id}
-                      onClick={() => handleModuleVideo(moduleVideo?.videoUrl)}
+                      onClick={() => handleModuleVideo(moduleVideo?.pdfUrl || moduleVideo?.videoUrl)}
                     >
                       <div className="border-b py-6 shadow-2xl mb-2 px-2 shadow-slate-950">
                         <h2>{moduleVideo?.title}</h2>

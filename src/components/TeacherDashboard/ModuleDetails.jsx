@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Module from "../../components/TeacherDashboard/module";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 
 const ModuleDetails = () => {
-  const { id:moduleId } = useParams();
+  const { id: moduleId } = useParams();
   console.log(moduleId);
-  
+
   const axiosLocal = useAxiosLocal();
 
   const getAllVideos = async () => {
@@ -22,17 +22,18 @@ const ModuleDetails = () => {
     <div className="ml-2 bg-[#001E2B] min-h-screen text-white">
       <h2>module details page this is module ID: {moduleId}</h2>
       {/* add resourse module video section  */}
-      <Module moduleId={moduleId} refetch={refetch}/>
+      <Module moduleId={moduleId} refetch={refetch} />
 
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
-              <th>Module Video SL</th>
+              <th>MV SL</th>
               <th>title</th>
               <th>img url </th>
               <th>video url </th>
+              <th>pdf url </th>
             </tr>
           </thead>
           <tbody>
@@ -51,7 +52,31 @@ const ModuleDetails = () => {
                     </div>
                   </div>
                 </th>
-                <th>{video?.videoUrl}</th>
+                {/* <th>{video?.videoUrl}</th> */}
+                <th>
+                  <Link className="border p-2" to={video?.videoUrl}>
+                    Video URL
+                  </Link>
+                </th>
+                {video?.pdfUrl ? (
+                  <div className="dropdown dropdown-left text-black">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="border text-white p-2 mt-5 m-1"
+                    >
+                      Pdf Url
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-fit py-10"
+                    >
+                      <li>{video?.pdfUrl}</li>
+                    </ul>
+                  </div>
+                ) : (
+                  <h2 className="mt-6 ml-4">N/A</h2>
+                )}
               </tr>
             ))}
           </tbody>
