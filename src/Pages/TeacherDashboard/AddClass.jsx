@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { imageUpload } from "../../Utils/Utils";
 import { useNavigate } from "react-router-dom";
+import QuizForm from "./QuizForm";
 
 const AddClass = () => {
   const { user } = useAuth();
@@ -136,6 +137,8 @@ const AddClass = () => {
           </div>
         </div>
       </div>
+
+      <QuizForm/>
     </>
   );
 };
