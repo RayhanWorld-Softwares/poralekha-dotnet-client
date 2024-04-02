@@ -3,14 +3,14 @@ import ReactPlayer from "react-player";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 import { useLoaderData, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import ClassFeedbackForm from "../AdminDashboard/ClassFeedbackForm";
 // import moment from "moment";
 // import { PDFDownloadLink } from "@react-pdf/renderer";
 // import Certificate from "../../components/Certificate/Certificate";
 import { pdfjs } from "react-pdf";
 import PdfDocumentViewer from "../../components/PdfDocumentViewer/PdfDocumentViewer";
-
+import StudentQuizForm from "./StudentQuizForm";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -45,7 +45,6 @@ const MyEnrollClassDetails = () => {
   const handleModule = async (moduleId) => {
     const res = await axiosLocal.get(`/api/videos/${moduleId}`);
     setModuleVideos(res.data?.payload);
-    console.log(res.data?.payload);
   };
 
   const handleModuleVideo = async (videoUrl) => {
@@ -114,18 +113,8 @@ const MyEnrollClassDetails = () => {
 
       {/* module section */}
       <div className="flex gap-10 min-h-screen">
-        {/* video area */}
+        {/* video and pdf area */}
         <div className=" w-4/6 ml-7 ">
-          {/* <ReactPlayer
-            controls
-            playIcon
-            playing
-            pip={true}
-            width={"100%"}
-            height={"400px"}
-            url={selectedVideoUrl}
-          /> */}
-
           {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
             <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
           ) : (
@@ -139,6 +128,7 @@ const MyEnrollClassDetails = () => {
               url={selectedVideoUrl}
             />
           )}
+          <StudentQuizForm/>
         </div>
 
         {/* module list */}
@@ -159,7 +149,11 @@ const MyEnrollClassDetails = () => {
                     <div
                       className="cursor-pointer"
                       key={moduleVideo?._id}
-                      onClick={() => handleModuleVideo(moduleVideo?.pdfUrl || moduleVideo?.videoUrl)}
+                      onClick={() =>
+                        handleModuleVideo(
+                          moduleVideo?.pdfUrl || moduleVideo?.videoUrl
+                        )
+                      }
                     >
                       <div className="border-b py-6 shadow-2xl mb-2 px-2 shadow-slate-950">
                         <h2>{moduleVideo?.title}</h2>

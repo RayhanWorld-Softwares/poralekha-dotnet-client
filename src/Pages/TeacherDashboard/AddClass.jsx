@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { imageUpload } from "../../Utils/Utils";
 import useAuth from "../../hooks/useAuth";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
-import { imageUpload } from "../../Utils/Utils";
-import { useNavigate } from "react-router-dom";
-import QuizForm from "./QuizForm";
 import StudentQuizForm from "../StudentDashboard/StudentQuizForm";
 
 const AddClass = () => {
@@ -138,9 +137,7 @@ const AddClass = () => {
           </div>
         </div>
       </div>
-
-      <QuizForm/>
-      <StudentQuizForm/>
+      <StudentQuizForm />
     </>
   );
 };

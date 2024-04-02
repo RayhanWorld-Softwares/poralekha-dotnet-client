@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import Module from "../../components/TeacherDashboard/module";
+import QuizForm from "../../Pages/TeacherDashboard/QuizForm";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
 
 const ModuleDetails = () => {
   const { id: moduleId } = useParams();
   console.log(moduleId);
-
   const axiosLocal = useAxiosLocal();
 
   const getAllVideos = async () => {
@@ -22,7 +22,10 @@ const ModuleDetails = () => {
     <div className="ml-2 bg-[#001E2B] min-h-screen text-white">
       <h2>module details page this is module ID: {moduleId}</h2>
       {/* add resourse module video section  */}
-      <Module moduleId={moduleId} refetch={refetch} />
+      <div className="flex justify-end">
+        <Module moduleId={moduleId} refetch={refetch} />
+        <QuizForm moduleId={moduleId} refetch={refetch} />
+      </div>
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -52,7 +55,7 @@ const ModuleDetails = () => {
                     </div>
                   </div>
                 </th>
-                {/* <th>{video?.videoUrl}</th> */}
+
                 <th>
                   <Link className="border p-2" to={video?.videoUrl}>
                     Video URL
@@ -79,6 +82,7 @@ const ModuleDetails = () => {
                 )}
               </tr>
             ))}
+            <h1 className="py-6 pl-2">1. Quiz Title: </h1>
           </tbody>
         </table>
       </div>
