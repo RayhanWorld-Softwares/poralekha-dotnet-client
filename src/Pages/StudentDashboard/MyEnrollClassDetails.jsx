@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { pdfjs } from "react-pdf";
 import PdfDocumentViewer from "../../components/PdfDocumentViewer/PdfDocumentViewer";
 import StudentQuizForm from "./StudentQuizForm";
+import useAuth from "../../hooks/useAuth";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -24,6 +25,32 @@ const MyEnrollClassDetails = () => {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
   console.log({ selectedVideoUrl });
 
+  const { user } = useAuth();
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  console.log(selectedQuiz);
+  // useEffect(() => {
+  //   const fetchQuizzes = async () => {
+  //     try {
+  //       const response = await axiosLocal.get(`/api/quiz/65fd2c5629c0087fe12f90a6`);
+  //       setQuizzes(response.data.payload.quiz);
+  //       console.log(response.data.payload.quiz)
+  //       setSelectedAnswers(
+  //         response.data.payload.quiz?.questions.map(() => ({
+  //           option: null,
+  //           correctAnswer: null,
+  //           text: null,
+  //           userEmail: user?.email,
+  //         }))
+  //       );
+  //     } catch (error) {
+  //       console.error("Error fetching quizzes:", error);
+  //     }
+  //   };
+  //   fetchQuizzes();
+  // }, [axiosLocal, user?.email]);
+
   // const getAssignment = async () => {
   //   const res = await axiosLocal.get(`/api/assignment`);
   //   return res?.data?.payload;
@@ -35,6 +62,7 @@ const MyEnrollClassDetails = () => {
 
   const getAllClassModule = async () => {
     const res = await axiosLocal.get(`/api/classModule/${payload?.classId}`);
+    console.log(res?.data?.payload);
     return res?.data?.payload;
   };
   const { data: classModules, refetch } = useQuery({
@@ -44,12 +72,32 @@ const MyEnrollClassDetails = () => {
 
   const handleModule = async (moduleId) => {
     const res = await axiosLocal.get(`/api/videos/${moduleId}`);
+    console.log(moduleId);
     setModuleVideos(res.data?.payload);
+    console.log(res.data?.payload);
+
+    const response = await axiosLocal.get(`/api/quiz/65fd2c5629c0087fe12f90a6`);
+    setQuizzes(response.data.payload.quiz);
+    console.log(response.data.payload.quiz);
+    setSelectedAnswers(
+      response.data.payload.quiz[0]?.questions.map(() => ({
+        option: null,
+        correctAnswer: null,
+        text: null,
+        userEmail: user?.email,
+      }))
+    );
   };
 
   const handleModuleVideo = async (videoUrl) => {
     console.log({ videoUrl });
     setSelectedVideoUrl(videoUrl);
+    setSelectedQuiz(null);
+  };
+
+  const handleQuizClick = (quiz) => {
+    setSelectedVideoUrl(null); // Reset selected video/PDF when selecting a quiz
+    setSelectedQuiz(quiz);
   };
 
   return (
@@ -113,24 +161,34 @@ const MyEnrollClassDetails = () => {
 
       {/* module section */}
       <div className="flex gap-10 min-h-screen">
-        {/* video and pdf area */}
+        {/* video  pdf and quiz area */}
+        {selectedVideoUrl && (
+          <div className=" w-4/6 ml-7 ">
+            {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
+              <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
+            ) : (
+              <ReactPlayer
+                controls
+                playIcon
+                playing
+                pip={true}
+                width={"100%"}
+                height={"400px"}
+                url={selectedVideoUrl}
+              />
+            )}
+          </div>
+        )}
+
         <div className=" w-4/6 ml-7 ">
-          {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
-            <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
-          ) : (
-            <ReactPlayer
-              controls
-              playIcon
-              playing
-              pip={true}
-              width={"100%"}
-              height={"400px"}
-              url={selectedVideoUrl}
+          {selectedQuiz && (
+            <StudentQuizForm
+              quizzes={quizzes}
+              selectedAnswers={selectedAnswers}
+              setSelectedAnswers={setSelectedAnswers}
             />
           )}
-          <StudentQuizForm/>
         </div>
-
         {/* module list */}
         <div className=" w-1/3 mr-3 bg-[#162C46] ">
           {classModules?.map((classModule) => (
@@ -158,6 +216,14 @@ const MyEnrollClassDetails = () => {
                       <div className="border-b py-6 shadow-2xl mb-2 px-2 shadow-slate-950">
                         <h2>{moduleVideo?.title}</h2>
                       </div>
+                    </div>
+                  ))}
+
+                  {quizzes?.map((quiz) => (
+                    <div key={quiz?._id} onClick={() => handleQuizClick(quiz)}>
+                      <h2 className="border p-3 cursor-pointer">
+                        {quiz?.title}
+                      </h2>
                     </div>
                   ))}
                 </div>
