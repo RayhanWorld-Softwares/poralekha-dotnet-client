@@ -29,7 +29,10 @@ const MyEnrollClassDetails = () => {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [quizzes, setQuizzes] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [selectedModuleId, setSelectedModuleId] = useState("");
+  const [showQuiz, setShowQuiz] = useState(false);
   console.log(selectedQuiz);
+  console.log(selectedModuleId);
   // useEffect(() => {
   //   const fetchQuizzes = async () => {
   //     try {
@@ -70,13 +73,20 @@ const MyEnrollClassDetails = () => {
     queryFn: getAllClassModule,
   });
 
+  
+  const handleQuizClick = async (quiz) => {
+    // setShowQuiz(true);
+    setSelectedVideoUrl(null); // Reset selected video/PDF when selecting a quiz
+    setSelectedQuiz(quiz);
+  };
+
+
+
   const handleModule = async (moduleId) => {
     const res = await axiosLocal.get(`/api/videos/${moduleId}`);
     console.log(moduleId);
     setModuleVideos(res.data?.payload);
-    console.log(res.data?.payload);
-
-    const response = await axiosLocal.get(`/api/quiz/65fd2c5629c0087fe12f90a6`);
+    const response = await axiosLocal.get(`/api/quiz/${moduleId}`);
     setQuizzes(response.data.payload.quiz);
     console.log(response.data.payload.quiz);
     setSelectedAnswers(
@@ -92,13 +102,9 @@ const MyEnrollClassDetails = () => {
   const handleModuleVideo = async (videoUrl) => {
     console.log({ videoUrl });
     setSelectedVideoUrl(videoUrl);
-    setSelectedQuiz(null);
   };
 
-  const handleQuizClick = (quiz) => {
-    setSelectedVideoUrl(null); // Reset selected video/PDF when selecting a quiz
-    setSelectedQuiz(quiz);
-  };
+ 
 
   return (
     <div className="bg-[#001E2B] min-h-screen text-white">
@@ -162,7 +168,7 @@ const MyEnrollClassDetails = () => {
       {/* module section */}
       <div className="flex gap-10 min-h-screen">
         {/* video  pdf and quiz area */}
-        {selectedVideoUrl && (
+        {selectedVideoUrl ? (
           <div className=" w-4/6 ml-7 ">
             {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
               <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
@@ -178,17 +184,18 @@ const MyEnrollClassDetails = () => {
               />
             )}
           </div>
+        ) : (
+          <div className=" w-4/6 ml-7 ">
+            {selectedQuiz &&  (
+              <StudentQuizForm
+                quizzes={quizzes}
+                selectedAnswers={selectedAnswers}
+                setSelectedAnswers={setSelectedAnswers}
+              />
+            )}
+          </div>
         )}
 
-        <div className=" w-4/6 ml-7 ">
-          {selectedQuiz && (
-            <StudentQuizForm
-              quizzes={quizzes}
-              selectedAnswers={selectedAnswers}
-              setSelectedAnswers={setSelectedAnswers}
-            />
-          )}
-        </div>
         {/* module list */}
         <div className=" w-1/3 mr-3 bg-[#162C46] ">
           {classModules?.map((classModule) => (
