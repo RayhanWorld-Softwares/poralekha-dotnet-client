@@ -19,11 +19,11 @@ const MyClassDetails = () => {
   });
 
   return (
-    <div className="bg-[#001E2B] min-h-screen">
+    <div className="bg-[#001E2B] min-h-screen pt-10 xl:pt-0">
       {/* class progress section */}
       {/* <ClassProgress /> */}
 
-      <div className="flex gap-10">
+      <div className="flex gap-10 justify-end">
         {/* class assignment */}
         {/* <ClassAssignment /> */}
 
@@ -32,12 +32,12 @@ const MyClassDetails = () => {
       </div>
 
       {/* existing resource */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mr-6">
         <table className="table">
           {/* head */}
           <thead className="bg-[#162C46] text-white">
             <tr className="uppercase font-bold">
-              <th>Module number</th>
+              <th>SL</th>
               <th>module title </th>
               <th>Course Name </th>
               <th>Action </th>
@@ -53,7 +53,7 @@ const MyClassDetails = () => {
                   to={`/teacher-dashboard/module-details/${classModule?._id}`}
                 >
                   <button
-                    className="btn btn-sm border-none bg-[#61adff] hover:bg-[#006ce1] text-white"
+                    className="btn btn-sm border-none bg-[#61adff] hover:bg-[#006ce1] text-white mt-4 md:my-4"
                     type="submit"
                   >
                     Add Resource{" "}

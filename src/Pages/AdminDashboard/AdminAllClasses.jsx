@@ -35,7 +35,7 @@ const AdminAllClasses = () => {
   };
 
   return (
-    <div className="bg-[#001E2B] h-screen text-white">
+    <div className="bg-[#001E2B] min-h-screen text-white pt-16 pr-6 xl:pr-0">
      
       <div className="overflow-x-auto">
         <table className="table">
@@ -72,7 +72,7 @@ const AdminAllClasses = () => {
                 </td>
                 <td>{allClass?.title}</td>
 
-                <td className="my-auto flex ">
+                <td className="my-auto flex min-w-[300px]">
                   {allClass?.description.length > 150 ? (
                     <p>{allClass?.description.slice(0, 150)}...</p>
                   ) : (

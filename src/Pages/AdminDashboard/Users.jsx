@@ -29,10 +29,10 @@ const Users = () => {
   };
 
   return (
-    <div className="bg-[#001E2B] min-h-screen text-white pl-3">
+    <div className="bg-[#001E2B] min-h-screen text-white pr-6 xl:pr-0">
       <div className="overflow-x-auto">
         {/* search bar */}
-        <div className="flex justify-center items-center my-6">
+        <div className="flex justify-center items-center my-4 ml-8 md:ml-0 xl:my-6">
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}

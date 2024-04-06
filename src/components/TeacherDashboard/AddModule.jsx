@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { MdCreateNewFolder } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -31,7 +32,7 @@ const AddModule = ({ classId, refetch }) => {
 
   return (
     <div className="py-6 ">
-      <div className="flex justify-end mr-16">
+      <div className="flex justify-end mr-8">
         <label
           htmlFor="my_modal_8"
           className="btn border-none bg-[#61adff] hover:bg-[#006ce1] text-white"

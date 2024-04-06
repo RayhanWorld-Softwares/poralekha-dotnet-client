@@ -40,7 +40,7 @@ const TeacherRequest = () => {
   };
 
   return (
-    <div className=" bg-[#001E2B] h-screen text-white">
+    <div className=" bg-[#001E2B] h-screen text-white pt-16 pr-6 xl:pr-0">
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
