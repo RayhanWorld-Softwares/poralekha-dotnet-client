@@ -22,7 +22,7 @@ const MyRequest = () => {
   }
 
   return (
-    <div className="bg-[#001E2B] h-screen text-white">
+    <div className="bg-[#001E2B] min-h-screen text-white pt-16 xl:pt-0">
       <div className="overflow-x-auto pt-2 ">
         <table className="table ">
           {/* head */}

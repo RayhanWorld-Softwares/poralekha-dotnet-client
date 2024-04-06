@@ -41,7 +41,7 @@ const Login = () => {
         <div className="hero">
           <div className="hero-content flex flex-col md:flex-row  rounded-xl justify-between">
             {/* image area */}
-            <div className="text-center hidden md:flex lg:text-left w-1/2">
+            <div className="text-center hidden lg:flex lg:text-left w-1/2">
               <img
                 className=""
                 src="https://i.postimg.cc/FRpbRLxf/3d-account-login-password-form-165488-5795.avif"

@@ -5,6 +5,7 @@ import StudentDashboard from "../Layout/StudentDashboard";
 import TeacherDashboard from "../Layout/TeacherDashboard";
 import AdminAllClasses from "../Pages/AdminDashboard/AdminAllClasses";
 import AdminProfile from "../Pages/AdminDashboard/AdminProfile";
+import FeedbackView from "../Pages/AdminDashboard/FeedbackView";
 import TeacherRequest from "../Pages/AdminDashboard/TeacherRequest";
 import Users from "../Pages/AdminDashboard/Users";
 import AllClasses from "../Pages/AllClasses/AllClasses";
@@ -16,6 +17,7 @@ import PaymentSuccessful from "../Pages/PaymentSuccessful/PaymentSuccessful";
 import Register from "../Pages/Register/Register";
 import MyEnrollClass from "../Pages/StudentDashboard/MyEnrollClass";
 import MyEnrollClassDetails from "../Pages/StudentDashboard/MyEnrollClassDetails";
+import MyRequest from "../Pages/StudentDashboard/MyRequest";
 import StudentProfile from "../Pages/StudentDashboard/StudentProfile";
 import AddClass from "../Pages/TeacherDashboard/AddClass";
 import MyClass from "../Pages/TeacherDashboard/MyClass";
@@ -23,8 +25,6 @@ import MyClassDetails from "../Pages/TeacherDashboard/MyClassDetails";
 import TeacherProfile from "../Pages/TeacherDashboard/TeacherProfile";
 import UpdateClasses from "../Pages/TeacherDashboard/UpdateClasses";
 import TechOnPoralekha from "../Pages/TechOnPoralekha/TechOnPoralekha";
-import FeedbackView from "../Pages/AdminDashboard/FeedbackView";
-import MyRequest from "../Pages/StudentDashboard/MyRequest";
 import ModuleDetails from "../components/TeacherDashboard/ModuleDetails";
 
 const router = createBrowserRouter([

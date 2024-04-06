@@ -1,8 +1,8 @@
-import { MdCreateNewFolder } from "react-icons/md";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { MdCreateNewFolder } from "react-icons/md";
 
 const Module = ({ refetch, moduleId }) => {
   const [title, setTitle] = useState("");

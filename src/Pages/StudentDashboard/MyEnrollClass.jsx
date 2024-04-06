@@ -22,17 +22,16 @@ const MyEnrollClass = () => {
     queryKey: ["enrolledClass"],
     queryFn: getEnrolledClass,
   });
-  
 
   return (
-    <div className=" bg-[#001E2B] min-h-screen w-full flex justify-center">
-      <div className="pt-24 ">
+    <div className=" bg-[#001E2B] min-h-screen w-full flex pr-6 pt-6 md:p-12 justify-center">
+      <div className=" md:ml-6">
         {enrolledClasses?.map((enrolledClass) => (
           <div
             key={enrolledClass?._id}
-            className=" bg-[#162C46]  flex  w-fit p-4 rounded-lg gap-5 mt-5"
+            className=" bg-[#162C46]  flex flex-col md:flex-row w-fit p-4 rounded-lg gap-5 mt-12 justify-center"
           >
-            <div className="w-72">
+            <div className=" md:w-72">
               <img src={enrolledClass?.image} alt="enrolled class image" />
             </div>
             <div className="ml-4">

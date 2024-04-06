@@ -166,10 +166,10 @@ const MyEnrollClassDetails = () => {
       </div> */}
 
       {/* module section */}
-      <div className="flex gap-10 min-h-screen">
+      <div className="flex flex-col lg:flex-row xl:gap-6 min-h-screen ">
         {/* video  pdf and quiz area */}
         {selectedVideoUrl ? (
-          <div className=" w-4/6 ml-7 ">
+          <div className=" lg:w-4/6 flex mr-6 xl:ml-12 justify-center md:pt-16 lg:pt-12.5 xl:pt-0 ">
             {selectedVideoUrl && selectedVideoUrl.endsWith(".pdf") ? (
               <PdfDocumentViewer pdfUrl={selectedVideoUrl} />
             ) : (
@@ -185,7 +185,7 @@ const MyEnrollClassDetails = () => {
             )}
           </div>
         ) : (
-          <div className=" w-4/6 ml-7 ">
+          <div className=" lg:w-4/6 ml-7 ">
             {selectedQuiz &&  (
               <StudentQuizForm
                 quizzes={quizzes}
@@ -197,7 +197,7 @@ const MyEnrollClassDetails = () => {
         )}
 
         {/* module list */}
-        <div className=" w-1/3 mr-3 bg-[#162C46] ">
+        <div className=" lg:w-1/3 mr-6 lg:mr-5 bg-[#162C46] mt-6 md:mt-20 xl:mt-0 ">
           {classModules?.map((classModule) => (
             <div
               onClick={() => handleModule(classModule?._id)}

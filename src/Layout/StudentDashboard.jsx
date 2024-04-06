@@ -4,11 +4,11 @@ import StudentSiteBar from "../components/StudentDashboard/StudentSiteBar";
 const StudentDashboard = () => {
   return (
     <div className="flex">
-      <div className="w-1/5">
+      <div className="xl:w-1/5 bg-[#001E2B]"> 
         <StudentSiteBar />
       </div>
 
-      <div className="w-4/5">
+      <div className="w-full xl:w-4/5">
         <Outlet />
       </div>
     </div>

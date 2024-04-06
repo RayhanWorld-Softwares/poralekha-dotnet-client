@@ -39,10 +39,10 @@ const Register = () => {
         role: "student",
       };
       const res = await axiosLocal.post("/api/users/register", userInfo);
-      if(res?.data.success === true){
-        toast.success("Registration Successfully ")
-        reset()
-        navigate("/")
+      if (res?.data.success === true) {
+        toast.success("Registration Successfully ");
+        reset();
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -58,7 +58,7 @@ const Register = () => {
       <div className="w-full min-h-screen flex bg-cover bg-center bg-[#f9fdff]">
         <div className="hero">
           <div className="hero-content flex flex-col md:flex-row  rounded-xl justify-between">
-            <div className="text-center hidden md:flex lg:text-left w-1/2">
+            <div className="text-center hidden lg:flex lg:text-left w-1/2">
               <img
                 className=""
                 src="https://i.postimg.cc/FRpbRLxf/3d-account-login-password-form-165488-5795.avif"
