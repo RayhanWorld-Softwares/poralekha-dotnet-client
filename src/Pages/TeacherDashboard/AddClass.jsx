@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { imageUpload } from "../../Utils/Utils";
 import useAuth from "../../hooks/useAuth";
 import useAxiosLocal from "../../hooks/useAxiosLocal";
-import StudentQuizForm from "../StudentDashboard/StudentQuizForm";
 
 const AddClass = () => {
   const { user } = useAuth();
@@ -47,16 +46,16 @@ const AddClass = () => {
     <>
       <div className="w-full min-h-screen flex bg-cover bg-center bg-[#001E2B]">
         <div className="hero">
-          <div className="hero-content flex items-center flex-col md:flex-row  rounded-xl justify-between gap-x-36">
+          <div className="hero-content flex items-center flex-col md:flex-row  rounded-xl justify-between pl-0 pr-6 lg:pr-0 ">
             {/* form area */}
             <div className="card w-full  flex-shrink-0 shadow-2xl text-white">
-              <div className="card-body  md:px-16 bg-[#162C46] rounded-md">
+              <div className="card-body mt-12 xl:mt-0 lg:px-16 bg-[#162C46] rounded-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="">
                   <h2 className="text-center text-3xl font-bold my-5">
                     Add New Class
                   </h2>
 
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
                     <div className="form-control">
                       <input
                         type="text"
@@ -71,7 +70,7 @@ const AddClass = () => {
                       )}
                     </div>
 
-                    <div className="form-control min-w-[350px]">
+                    <div className="form-control ">
                       <input
                         type="text"
                         {...register("price", { required: true })}
@@ -85,7 +84,7 @@ const AddClass = () => {
                       )}
                     </div>
 
-                    <div className="border flex items-center rounded-md px-2">
+                    <div className="border flex items-center rounded-md px-2 py-2.5 md:py-0">
                       {user?.displayName}
                     </div>
 
@@ -93,7 +92,7 @@ const AddClass = () => {
                       {user?.email}
                     </div>
 
-                    <div className="border rounded-lg px-2 flex items-center">
+                    <div className="border rounded-lg px-2 flex items-center py-2.5 md:py-0">
                       <input
                         {...register("image", { required: true })}
                         required
@@ -108,7 +107,7 @@ const AddClass = () => {
                       )}
                     </div>
 
-                    <div className="form-control min-w-[350px]">
+                    <div className="form-control ">
                       <input
                         type="text"
                         {...register("description", { required: true })}
@@ -137,7 +136,6 @@ const AddClass = () => {
           </div>
         </div>
       </div>
-      <StudentQuizForm />
     </>
   );
 };

@@ -4,11 +4,11 @@ import TeacherSideBar from "../components/TeacherDashboard/TeacherSideBar";
 const TeacherDashboard = () => {
   return (
     <div className="flex">
-      <div className="w-1/5">
+      <div className="xl:w-1/5 bg-[#001E2B]">
         <TeacherSideBar />
       </div>
 
-      <div className="w-4/5">
+      <div className="w-full xl:w-4/5">
         <Outlet />
       </div>
     </div>

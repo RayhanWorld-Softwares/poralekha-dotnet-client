@@ -64,8 +64,8 @@ const MyClass = () => {
   };
 
   return (
-    <div className="  bg-[#001E2B] min-h-screen  text-white">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-6 xl:px-16 pt-5 pb-12 ">
+    <div className="  bg-[#001E2B] min-h-screen  text-white py-12 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 pt-4 gap-6 pr-6 pl-0 xl:pl-6 ">
         {myClasses?.map((myClass) => (
           <div key={myClass?._id}>
             <div className="card card-compact bg-[#162C46] shadow-xl">
