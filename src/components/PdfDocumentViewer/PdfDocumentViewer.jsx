@@ -2,22 +2,30 @@ import { useState } from "react";
 import { Document, Page } from "react-pdf";
 
 const PdfDocumentViewer = ({ pdfUrl }) => {
-  console.log(5, { pdfUrl });
-  const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
 
   return (
-    <div className="border">
+    <div className="">
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} />
+        {Array.from(new Array(numPages), (el, index) => (
+          <div
+            key={index}
+            style={{
+              marginBottom: "8px",
+              padding: "0",
+              overflow: "hidden",
+              // width: "round(var(--scale-factor) * 770.08px, 1px)",
+              height: "round(var(--scale-factor) * 841.68px, 1px)",
+            }}
+          >
+            <Page pageNumber={index + 1} />
+          </div>
+        ))}
       </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
     </div>
   );
 };
